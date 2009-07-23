@@ -12,11 +12,8 @@ extern int yyInputFileLineNo;
 
 %s newline
 
-WORD             [a-zA-Z][a-zA-Z0-9"+""-""~"".""_""/"]*
+WORD             [a-zA-Z][a-zA-Z0-9"+""-""~"".""_"]*
 DIGIT            [0-9]
-VERSIONTAGSOSY	 {DIGIT}"."{DIGIT}"."{DIGIT}
-VERSIONTAGSDEC	 {DIGIT}"."{DIGIT}[a-z]
-VERSIONTAGHDEC	 "/"{DIGIT}"."{DIGIT}
 NUMBER           [-+]?{DIGIT}+"."?{DIGIT}*([eE][-+]?{DIGIT}+)?
 ENERGYUNIT       [kMGTPE]?eV
 CROSSSECTIONUNIT [npfa]b
@@ -118,9 +115,6 @@ Q[ \t]*=                  {
 			      if (!strcmp(yytext, "Calculator")) { 
 				  return T_CALCULATOR;
                               }
-						if (!strcmp(yytext, "DecayCalculator" )) {
-							return T_DECAYCALCULATOR;
-						}
 			      if (!strcmp(yytext, "RelicDensityCalculator")) { 
 				  return T_RELICDENSITYCALCULATOR;
 			      }
@@ -146,33 +140,6 @@ Q[ \t]*=                  {
                               return T_KEY;
                           }
 
-{VERSIONTAGSOSY} {
-								BEGIN(INITIAL);
-								if(strlen(yytext) > 254 ) {
-									fprintf(stderr, "Key too long in input file line %d", yyInputFileLineNo);
-									yyParseError = 1;
-								}
-								strcpy(yylval.name, yytext);
-								return T_VERSIONTAGSOSY;
-								}
-{VERSIONTAGSDEC} {
-								BEGIN(INITIAL);
-								if(strlen(yytext) > 254 ) {
-									fprintf(stderr, "Key too long in input file line %d", yyInputFileLineNo);
-									yyParseError = 1;
-								}
-								strcpy(yylval.name, yytext);
-								return T_VERSIONTAGSDEC;
-								}
-{VERSIONTAGHDEC} {
-								BEGIN(INITIAL);
-								if(strlen(yytext) > 254 ) {
-									fprintf(stderr, "Key too long in input file line %d", yyInputFileLineNo);
-									yyParseError = 1;
-								}
-								strcpy(yylval.name, yytext);
-								return T_VERSIONTAGHDEC;
-								}
 {ENERGYUNIT}              {
                               if (!strcmp(yytext, "eV")) {
                                   yylval.integer = -9;
