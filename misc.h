@@ -112,7 +112,8 @@ using namespace std;
 
 
 enum SwitchState    { off, on };
-enum Calculator     { SPHENO, SUSPECT, SPHENO_FH };
+enum Calculator     { SPHENO, SUSPECT, SPHENO_FH, SOFTSUSY };
+enum DecayCalculator		{ SUSYHIT };
 enum RelicDensityCalculator { NORELICDENSITYCALCULATOR, MICROMEGAS };
 enum LEOCalculator  { NOLEOCALCULATOR, NPFITTER};
 enum ObservableType { mass, Pwidth, xsection, br, xsectionbr, Pedge, xsbr, brratio, brsum, LEObs, brprod, tauFromStau1Polarisation, SMPrecision, other, weighted };
@@ -138,6 +139,7 @@ extern bool         yyUseLoopCorrections;
 extern bool         yyCalcPullDist;
 extern bool         yyScanParameters;
 extern unsigned int yyCalculator;
+extern unsigned int yyDecayCalculator;
 extern unsigned int yyRelicDensityCalculator;
 extern unsigned int yyLEOCalculator;
 extern map<int,string> yyParticleNames;

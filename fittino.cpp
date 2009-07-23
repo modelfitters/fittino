@@ -101,6 +101,9 @@ extern "C" { void call_suspect_free_(int *,int *,double *,double *,double *,
 //extern "C" { void get_suspect_(double [],double [],double *,double [],double [2][2],double [2][2],double [4][4],double []);}
 void callSuspect();
 int callSPheno();
+int callSoftSusy();
+int callSUSYHIT();
+int WriteSUSYHITInputFile();
 int callNPFitter();
 int checkcall(char programpath[1024], unsigned int runtime);
 void WriteLesHouches(double* x);
@@ -3259,22 +3262,53 @@ void Fittino::CalcFromRandPars(unsigned int nruns) {
 	    cerr << "Check path in input file." << endl;
 	    exit(EXIT_FAILURE);
 	 }
-      }
-
-      //Calling SPheno to calculate observables
+	 }
+	 if( yyDecayCalculatorPath.compare("") ) {
+		if( access( yyDecayCalculatorPath.c_str(), X_OK) ) {
+			cerr<< "Cannot find DecayCalculator " << yyDecayCalculatorPath << endl;
+			cerr<< "Check path in input file." << endl;
+			exit(EXIT_FAILURE);
+		}
+	}
+	//Calling SPheno to calculate observables
       int rc = 0;
-      rc = callSPheno();
-      if (rc == 2) {
-	 cout << "SIGINT received in SPheno, exiting" << endl;
-	 exit (2);
-      }
-      Double_t f = 0.;
-      if (rc > 0) {
-	 cerr << "Exiting fitterFCN because of problem in SPheno run" << endl;
-	 f = 111111111111.;
-	 cout << " f = " << f << endl;
-	 return;        
-      }
+			Double_t f = 0.;
+			if( yyCalculator == SPHENO ) {
+ 		  	rc = callSPheno();
+ 		    if (rc == 2) {
+				cout << "SIGINT received in SPheno, exiting" << endl;
+				exit (2);
+      	}
+      	if (rc > 0) {
+		 		cerr << "Exiting fitterFCN because of problem in SPheno run" << endl;
+				f = 111111111111.;
+				cout << " f = " << f << endl;
+	 		}
+			else if( yyCalculator == SOFTSUSY ) {
+				if( yyFitModel != AMSB && yyFitModel != GMSB && yyFitModel != mSUGRA ) {
+					cout << "SoftSUSY currently works only with AMSB, GMSB and mSUGRA. sorry. " << endl;
+				}
+				if( yyDecayCalculator != SUSYHIT ) {
+					cout << "SoftSUSY currently works only with SUSYHIT. sorry. " <<endl;
+					exit(1);
+				}
+				rc = callSoftSusy();
+				if( rc > 0 ) {
+					cerr << "Exiting fitter FCN because of problem in SoftSusy run" << endl;
+					f = 111111111111.;
+					cout << "f = " << f << endl;
+				}
+				cout << "     SoftSusy finished (Maybe With Problems?). Calling SUSYHIT" << endl;
+        rc = callSUSYHIT();
+        if( rc > 0 ) {
+          cerr << "Exiting fitterFCN because of problem in SUSYHIT run" << endl;
+          f = 111111111111.;
+          cout << " f = " << f << endl;
+          return;
+        }
+			}
+			return;        
+     }
 
       //Reading the Les Houches outputfile
       rc = ReadLesHouches();
@@ -3405,7 +3439,15 @@ void fitterFCN(Int_t &, Double_t *, Double_t &f, Double_t *x, Int_t iflag)
 	 cerr << "Check path in input file." << endl;
 	 exit(EXIT_FAILURE);
       }
-   }
+			}
+			if( yyDecayCalculatorPath.compare("") ) {
+				if( access( yyDecayCalculatorPath.c_str(), X_OK) ) {
+					cerr<< "Cannot find DecayCalculator " << yyDecayCalculatorPath << endl;
+					cerr<< "Check path in input file." << endl;
+					exit(EXIT_FAILURE);
+				}
+			}
+   
 
    if (yyCalculator == SUSPECT) {
       callSuspect();
@@ -3414,17 +3456,46 @@ void fitterFCN(Int_t &, Double_t *, Double_t &f, Double_t *x, Int_t iflag)
       cout << yyDashedLine << endl;
       cout << "Calling SPheno" << endl;
       rc = callSPheno();
-   }
-   if (rc == 2) {
-      cout << "SIGINT received in SPheno, exiting" << endl;
-      exit (2);
-   }
-   if (rc > 0) {
-      cerr << "Exiting fitterFCN because of problem in SPheno run" << endl;
-      f = 111111111111.;
-      cout << " f = " << f << endl;
-      return;        
-   }
+   
+  	  if (rc == 2) {
+      	cout << "SIGINT received in SPheno, exiting" << endl;
+      	exit (2);
+   		}
+   		if (rc > 0) {
+     	 cerr << "Exiting fitterFCN because of problem in SPheno run" << endl;
+     	 f = 111111111111.;
+     	 cout << " f = " << f << endl;
+     	 return;        
+   		}
+		}
+	 	else if (yyCalculator == SOFTSUSY) {
+			if( yyFitModel != AMSB && yyFitModel != GMSB && yyFitModel != mSUGRA ) {
+				cout << "FATAL: SOFTSUSY SUPOPRT AT THE MOMENT ONLY FOR  GMSB, AMSB and mSUGRA. " << yyFitModel << " MAY BE AVAILABLE LATER . . . (sorry :( )"<< endl;
+				exit(1);
+			}
+			if (yyDecayCalculator != SUSYHIT ) {
+				cout << "SoftSUSY currently runs only with SUSYHIT. Sorry. " << endl;
+				exit(1);
+			}
+	 		cout << yyDashedLine << endl;
+			cout << "Calling SoftSusy" << endl;
+			rc = callSoftSusy();
+			if( rc > 0 ) {
+				cerr << "Exiting fitterFCN because of problem in SoftSusy run" << endl;
+				f = 111111111111.;
+				cout << " f = " << f << endl;
+				return;	
+			}
+			cout << "     SoftSusy finished (Maybe With Problems?). Calling SUSYHIT" << endl;
+				rc = callSUSYHIT();
+				if( rc > 0 ) {
+					cerr << "Exiting fitterFCN because of problem in SUSYHIT run" << endl;
+					f = 111111111111.;
+					cout << " f = " << f << endl;
+					return;		
+				}
+		}    
+												
 
    if (yyLEOCalculator == NPFITTER) {
       cout << yyDashedLine << endl;
@@ -3996,7 +4067,143 @@ double higgsBR(int id, vector<int> daughter_list) {
    }
    return br;
 }
+// This Function writes the SUSYHIT InputFile
 
+int WriteSUSYHITInputFile() {
+	system("rm susyhit.in");
+	ofstream susyhit_in("susyhit.in", ios::out);
+	if( !susyhit_in ) {
+		return 1006;
+	}
+	susyhit_in << "* SUspect-SdecaY-Hdecay-InTerface options:" << endl;
+	susyhit_in << "------------------------------------------" << endl;
+  susyhit_in << "  (1) link SuSpect-Sdecay-Hdecay and take the input parameters from SuSpect" << endl;
+  susyhit_in << "  (2) link Sdecay-Hdecay, not SuSpect, take the input parameters from any SLHA" << endl;
+  susyhit_in << "      input, called slhaspectrum.in " << endl;
+	susyhit_in << "2" << endl;
+	susyhit_in << "* Choice of the output, SLHA format (1) or simple (0):" << endl;
+	susyhit_in << "------------------------------------------------------" << endl;
+	susyhit_in << "1" << endl;
+	susyhit_in << "* HDECAY input parameters:" << endl;
+	susyhit_in << "--------------------------" << endl;
+	susyhit_in << "MSBAR(1) = 0.190D0" << endl;
+	susyhit_in << "MC       = 1.40D0" << endl;
+	susyhit_in << "MMUON    = 0.105658389D0" << endl;
+	susyhit_in << "1/ALPHA  = 137.0359895D0" << endl;
+	susyhit_in << "GAMW     = 2.080D0" << endl;
+	susyhit_in << "GAMZ     = 2.490D0" << endl;
+	susyhit_in << "VUS      = 0.2205D0" << endl;
+	susyhit_in << "VCB      = 0.04D0" << endl;
+	susyhit_in << "VUB/VCB  = 0.08D0" << endl;
+
+	susyhit_in.close();
+	return 0;
+}
+
+// This Function calls SUSYHIT - only used when yyCalculator == SOFTSUSY
+
+
+int callSUSYHIT() {
+	if( WriteSUSYHITInputFile() > 0 ) {
+		return 1005;
+	}
+	int return_value;
+	int pid = -2;
+	int status = 0;
+	int child_pid = 0;
+
+	if( (pid = fork()) < 0 ) {
+		perror("fork");
+		exit(1);
+	}
+	if( pid == 0 ) {
+		child_pid = getpid();
+		char *argv[2];
+		argv[0] = "SUSYHIT";
+		argv[1] = 0;
+		if ( !yyDecayCalculatorPath.compare("")) {	
+			return_value = execve("./SUSYHIT", argv, environ);
+		}
+		else {
+			return_value = execve(yyDecayCalculatorPath.c_str(), argv, environ );
+		}
+		exit(return_value);
+	}
+	else {
+		int SUSYHIT_counter = 0;
+		while(1) {
+			SUSYHIT_counter++;
+			if(waitpid( pid, &status, WNOHANG) == pid ) {
+				break;
+			}
+			if( yyMaxCalculatorTime < (float)SUSYHIT_counter/10. ) {
+				printf("killing childprocess %d due to too much time\n", pid);
+				kill(pid, 9);
+				waitpid( -1, &status, 0);
+				return(1);
+			}
+			usleep(100000);
+		}
+	}
+	return_value= WEXITSTATUS(status);
+  cout << "SUSYHIT returned with return value " << return_value << endl;
+  if( return_value > 0 ) {
+    return(return_value);
+  }
+  return 0;
+}
+//Call SoftSusy here
+int callSoftSusy() {
+	int return_value;
+	int pid = -2;
+	int status = 0;
+	int child_pid = 0;
+	
+	if( (pid = fork()) < 0 ) {
+		perror("fork");
+		exit(1);
+	}
+
+	if( pid == 0 ) {
+		child_pid = getpid();
+		char *argv[3];
+		argv[0] = "softpoint.x";
+		argv[1] = "leshouches";
+		argv[2] = 0;
+		
+		freopen("LesHouches.in","r", stdin);
+		freopen("slhaspectrum.in", "w+", stdout);
+		if( !yyCalculatorPath.compare("")) {
+			return_value = execve("./softpoint.x", argv, environ );
+		}
+		else {
+			return_value = execve(yyCalculatorPath.c_str(), argv, environ );
+		}
+		exit(return_value);
+	}
+	else {
+		int softsusy_counter = 0;
+		while(1) { 
+			softsusy_counter++;
+			if(waitpid( pid, &status, WNOHANG) == pid ) {
+				break;
+			}
+			if( yyMaxCalculatorTime < (float)softsusy_counter/10. ) {
+				printf("killing childprocess %d due to too much time\n",pid);
+				kill( pid, 9);
+				waitpid(-1, &status, 0);
+				return(1);
+			}
+			usleep(100000);
+		}
+	}
+	return_value= WEXITSTATUS(status);
+	cout << "softsusy returned with return value " << return_value << endl;
+	if( return_value > 0 ) {
+		return(return_value);
+	}
+	return 0;
+}
 // ************************************************************
 // callSPheno
 //
@@ -4006,7 +4213,6 @@ double higgsBR(int id, vector<int> daughter_list) {
 // P. Bechtle, P. Wienemann, 18.09.03
 //
 // ************************************************************
-
 int callSPheno() 
 {
    int return_value;
@@ -4630,10 +4836,18 @@ void WriteLesHouches(double* x)
 
       if ( yyFitModel != NMSSM ) {
 	 if (FindInFixed("massA0")) {
-	    LesHouchesOutfile << "   24  "<< sqr(ReturnFixedValue("massA0")->value) <<" # mA (fixed)"<< endl;
+	    if( yyCalculator == SOFTSUSY ) {
+				LesHouchesOutfile << "   24  " << ReturnFixedValue("massA0")->value << " # mA (fixed)" << endl;
+			}
+			else 
+				LesHouchesOutfile << "   24  "<< sqr(ReturnFixedValue("massA0")->value) <<" # mA (fixed)"<< endl;
 	 }    
 	 else if (FindInFitted("massA0")) {
-	    LesHouchesOutfile << "   24  "<< sqr(x[ReturnFittedPosition("massA0")])<<" # mA"<< endl;
+	 		if( yyCalculator == SOFTSUSY ) {
+				LesHouchesOutfile << "   24  " << x[ReturnFittedPosition("massA0")] <<" # mA" << endl;
+			}
+			else
+	   	 LesHouchesOutfile << "   24  "<< sqr(x[ReturnFittedPosition("massA0")])<<" # mA"<< endl;
 	    if (yyVerbose || ( TMath::Abs( ( (float)(n_printouts+1)/10. ) - (n_printouts+1)/10 ) < 0.01 ) ) { 
 	       cout << "Fitting mA " << x[ReturnFittedPosition("massA0")] << endl;
 	    }
@@ -5122,6 +5336,7 @@ void WriteLesHouches(double* x)
 	    }
 	 }
       }
+		if( yyCalculator == SPHENO ) {  //ADDED SOMETHING HERE
       // BLOCK SPhenoInput
       LesHouchesOutfile << "BLOCK SPHENOINPUT" << endl;
       LesHouchesOutfile << "    1  0                  # error level" << endl;
@@ -5130,39 +5345,50 @@ void WriteLesHouches(double* x)
       LesHouchesOutfile << "   12  1.00000000E-04     # write only branching ratios larger than this value" << endl;
       LesHouchesOutfile << "   21  1                  # calculate cross section" << endl;
       for (unsigned int j = 0; j < CrossSectionProduction.size(); j++) {
-	 LesHouchesOutfile << "   22  " << CrossSectionProduction[j][0] << "     # cms energy in GeV" << endl;
-	 LesHouchesOutfile << "   23  " << CrossSectionProduction[j][1] << "     # polarisation of incoming e- beam" << endl;
-	 LesHouchesOutfile << "   24  " << CrossSectionProduction[j][2] << "     # polarisation of incoming e+ beam" << endl;
-	 if (!yyISR) {
-	    LesHouchesOutfile << "   25  0                  # no ISR is calculated" << endl;
-	 } else {
-	    LesHouchesOutfile << "   25  1                  # ISR is calculated" << endl;
-	 }
+				 LesHouchesOutfile << "   22  " << CrossSectionProduction[j][0] << "     # cms energy in GeV" << endl;
+				 LesHouchesOutfile << "   23  " << CrossSectionProduction[j][1] << "     # polarisation of incoming e- beam" << endl;
+				 LesHouchesOutfile << "   24  " << CrossSectionProduction[j][2] << "     # polarisation of incoming e+ beam" << endl;
+	 			if (!yyISR) {
+	  			LesHouchesOutfile << "   25  0                  # no ISR is calculated" << endl;
+				} 
+				else {
+			    LesHouchesOutfile << "   25  1                  # ISR is calculated" << endl;
+	 			}
       }
       LesHouchesOutfile << "   26  1.00000000E-05     # write only cross sections larger than this value [fb]" << endl;
       LesHouchesOutfile << "   31  -1.00000000E+00     # m_GUT, if < 0 than it determined via g_1=g_2" << endl;
       LesHouchesOutfile << "   32  0                  # require strict unification g_1=g_2=g_3 if '1' is set " << endl;
       LesHouchesOutfile << "   33  1000.              #  Q_EWSB, if < 0 than  Q_EWSB=sqrt(m_~t1 m_~t2) " << endl;
       if (FindInFixed("massCharm")) {
-	 LesHouchesOutfile << "   63  "<<ReturnFixedValue("massCharm")->value<<" # mcharm (fixed)"<<endl;
+				LesHouchesOutfile << "   63  "<<ReturnFixedValue("massCharm")->value<<" # mcharm (fixed)"<<endl;
       }
       else if (FindInFitted("massCharm")) {
-	 LesHouchesOutfile << "   63  "<<x[ReturnFittedPosition("massCharm")]<<" # mcharm"<<endl;
-	 if (yyVerbose || ( TMath::Abs( ( (float)(n_printouts+1)/10. ) - (n_printouts+1)/10 ) < 0.01 ) ) { 
-	    cout << "Fitting mCharm " << x[ReturnFittedPosition("massCharm")] << endl;
-	 }
+				LesHouchesOutfile << "   63  "<<x[ReturnFittedPosition("massCharm")]<<" # mcharm"<<endl;
+			 	if (yyVerbose || ( TMath::Abs( ( (float)(n_printouts+1)/10. ) - (n_printouts+1)/10 ) < 0.01 ) ) { 
+	    	cout << "Fitting mCharm " << x[ReturnFittedPosition("massCharm")] << endl;
+				 }
       } 
       else if (FindInUniversality("massCharm")) {
-	 LesHouchesOutfile << "   63  "<<x[ReturnFittedPosition(ReturnUniversality("massCharm")->universality)]<<" # massCharm"<<endl;
-	 if (yyVerbose || ( TMath::Abs( ( (float)(n_printouts+1)/10. ) - (n_printouts+1)/10 ) < 0.01 ) ) { 
-	    cout << "fitting " << ReturnUniversality("massCharm")->universality << " instead of massCharm" << endl;
-	 }
+				 LesHouchesOutfile << "   63  "<<x[ReturnFittedPosition(ReturnUniversality("massCharm")->universality)]<<" # massCharm"<<endl;
+				 if (yyVerbose || ( TMath::Abs( ( (float)(n_printouts+1)/10. ) - (n_printouts+1)/10 ) < 0.01 ) ) { 
+	   			 cout << "fitting " << ReturnUniversality("massCharm")->universality << " instead of massCharm" << endl;
+				 }
       }
       else {
-	 LesHouchesOutfile << "   63  "<<ReturnMeasuredValue("massCharm")->value<<" # mcharm (fixed)"<<endl;
+				 LesHouchesOutfile << "   63  "<<ReturnMeasuredValue("massCharm")->value<<" # mcharm (fixed)"<<endl;
       }
-   }
-
+   	}
+						//ADDED SOMETHING HERE
+	else if( yyCalculator == SOFTSUSY ) {
+		//ADD BLOCK SOFTSUSY
+		LesHouchesOutfile << "BLOCK SOFTSUSY        #SOFTSUSY specific inputs" << endl;
+		LesHouchesOutfile << "    1 	0.1     			# desired fractional accuracy in output " << endl;
+		LesHouchesOutfile << "    2   -1.0           # quark mixing option " << endl;
+		LesHouchesOutfile << "    3   0.0           # gives additional verbose output during caclualtion " << endl;
+		LesHouchesOutfile << "    4   1000.0		    # change electroweak symmetry breaking scale " << endl;
+		LesHouchesOutfile << "    5   1.0           # Full 2-loop running in RGEs " << endl;
+	}
+	}
    else if (yyFitModel == mSUGRA) {
 
       LesHouchesOutfile << "BLOCK MODSEL                 # Select model" << endl;
@@ -5448,7 +5674,7 @@ void WriteLesHouches(double* x)
 	 cerr<<"SignMu must be fixed to either 1 or -1"<<endl;
 	 exit(EXIT_FAILURE);
       }
-
+			if( yyCalculator == SPHENO ) {
       LesHouchesOutfile << "BLOCK SPHENOINPUT" << endl;
       LesHouchesOutfile << "    1  0                  # error level" << endl;
       LesHouchesOutfile << "    2  0                  # if 1, then SPA conventions are used" << endl;
@@ -5488,7 +5714,17 @@ void WriteLesHouches(double* x)
 	 LesHouchesOutfile << "   63  "<<ReturnMeasuredValue("massCharm")->value<<" # mcharm (fixed)"<<endl;
       }
    }
-
+	
+	else if( yyCalculator == SOFTSUSY ) {
+	    //ADD BLOCK SOFTSUSY
+		LesHouchesOutfile << "BLOCK SOFTSUSY        #SOFTSUSY specific inputs" << endl;
+		LesHouchesOutfile << "    1   0.1           # desired fractional accuracy in output " << endl;
+		LesHouchesOutfile << "    2   -1.0           # quark mixing option " << endl;
+		LesHouchesOutfile << "    3   0.0           # gives additional verbose output during caclualtion " << endl;
+		LesHouchesOutfile << "    4   1000.0        # change electroweak symmetry breaking scale " << endl;
+		LesHouchesOutfile << "    5   1.0           # Full 2-loop running in RGEs " << endl;
+	}
+	}															
    else if (yyFitModel == XMSUGRA) {
 
       LesHouchesOutfile << "BLOCK MODSEL                 # Select model"     << endl;
@@ -5855,6 +6091,7 @@ void WriteLesHouches(double* x)
 	 exit (EXIT_FAILURE);
       }
       // BLOCK SPhenoInput
+			if( yyCalculator == SPHENO ) {
       LesHouchesOutfile << "BLOCK SPHENOINPUT" << endl;
       LesHouchesOutfile << "    1  0                  # error level" << endl;
       LesHouchesOutfile << "    2  0                  # if 1, then SPA conventions are used" << endl;
@@ -5894,7 +6131,16 @@ void WriteLesHouches(double* x)
 	 LesHouchesOutfile << "   63  "<<ReturnMeasuredValue("massCharm")->value<<" # mcharm (fixed)"<<endl;
       }
    }
-
+		else if( yyCalculator == SOFTSUSY ) {
+			//ADD BLOCK SOFTSUSY
+			LesHouchesOutfile << "BLOCK SOFTSUSY        #SOFTSUSY specific inputs" << endl;
+			LesHouchesOutfile << "    1   0.1           # desired fractional accuracy in output " << endl;
+			LesHouchesOutfile << "    2   -1.0           # quark mixing option " << endl;
+			LesHouchesOutfile << "    3   0.0           # gives additional verbose output during caculaltion " << endl;
+			LesHouchesOutfile << "    4   1000.0	      # change electroweak symmetry breaking scale " << endl;
+			LesHouchesOutfile << "    5   1.0           # Full 2-loop running in RGEs " << endl;
+		}	
+	}
    else if (yyFitModel == GMSB) {
 
       LesHouchesOutfile<<"BLOCK MODSEL                 # Select model"<<endl;
@@ -6171,7 +6417,7 @@ void WriteLesHouches(double* x)
 	 cerr<<"N5 must be fixed to an integer number"<<endl;
 	 exit(EXIT_FAILURE);
       }
-
+			if( yyCalculator == SPHENO ) {
       LesHouchesOutfile << "BLOCK SPHENOINPUT" << endl;
       LesHouchesOutfile << "    1  0                  # error level" << endl;
       LesHouchesOutfile << "    2  0                  # if 1, then SPA conventions are used" << endl;
@@ -6211,7 +6457,16 @@ void WriteLesHouches(double* x)
 	 LesHouchesOutfile << "   63  "<<ReturnMeasuredValue("massCharm")->value<<" # mcharm (fixed)"<<endl;
       }
    }
-
+	else if( yyCalculator == SOFTSUSY ) {
+  	//ADD BLOCK SOFTSUSY
+		LesHouchesOutfile << "BLOCK SOFTSUSY        #SOFTSUSY specific inputs" << endl;
+		LesHouchesOutfile << "    1   0.1           # desired fractional accuracy in output " << endl;
+		LesHouchesOutfile << "    2   -1.0           # quark mixing option " << endl;
+		LesHouchesOutfile << "    3   0.0           # gives additional verbose output during caclualtion " << endl;
+		LesHouchesOutfile << "    4  	1.0		    # change electroweak symmetry breaking scale " << endl;
+		LesHouchesOutfile << "    5   1.0           # Full 2-loop running in RGEs " << endl;
+	}
+}
 	 else if (yyFitModel == AMSB) {
 
 	    LesHouchesOutfile<<"BLOCK MODSEL                 # Select model"<<endl;
@@ -6453,7 +6708,7 @@ void WriteLesHouches(double* x)
 	       cerr<<"SignMu must be fixed to either 1 or -1"<<endl;
 	       exit(EXIT_FAILURE);
 	    }
-
+			if( yyCalculator == SPHENO ) {
 	    LesHouchesOutfile << "BLOCK SPHENOINPUT" << endl;
 	    LesHouchesOutfile << "    1  0                  # error level" << endl;
 	    LesHouchesOutfile << "    2  0                  # if 1, then SPA conventions are used" << endl;
@@ -6493,7 +6748,16 @@ void WriteLesHouches(double* x)
 	       LesHouchesOutfile << "   63  "<<ReturnMeasuredValue("massCharm")->value<<" # mcharm (fixed)"<<endl;
 	    }
 	 }
-
+		else if( yyCalculator == SOFTSUSY ) {
+		    //ADD BLOCK SOFTSUSY
+		    LesHouchesOutfile << "BLOCK SOFTSUSY        #SOFTSUSY specific inputs" << endl;
+		    LesHouchesOutfile << "    1   0.1           # desired fractional accuracy in output " << endl;
+		    LesHouchesOutfile << "    2   -1.0           # quark mixing option " << endl;
+		    LesHouchesOutfile << "    3   0.0           # gives additional verbose output during caclualtion " << endl;
+		    LesHouchesOutfile << "    4   1.0        # change electroweak symmetry breaking scale " << endl;
+		    LesHouchesOutfile << "    5   1.0           # Full 2-loop running in RGEs " << endl;
+		}
+		}
 	       else {
 		  cerr << "Unknown fit model in WriteLesHouches" << endl;
 		  exit(EXIT_FAILURE);
@@ -6902,6 +7166,7 @@ int   ReadLesHouches()
    // test reading of low energy measurements
    //========================================
    //if (yyLEOCalculator == NOLEOCALCULATOR) {
+	 if( yyCalculator == SPHENO ) {
    cout << "  --->  yybsg            from SPheno:     " << yybsg    << endl;   //  1  BR(b -> s gamma) 
    cout << "  --->  yybsmm           from SPheno:     " << yybsmm   << endl;   //  2  BR(b -> s mu+ mu-)
    cout << "  --->  yyB_smm          from SPheno:     " << yyB_smm  << endl;   //  3  BR(Bs -> mu+ mu-)
@@ -6914,7 +7179,12 @@ int   ReadLesHouches()
    cout << "  --->  yydrho           from SPheno:     " << yydrho   << endl;   // 30  Delta(rho_parameter)
    cout << "  --->  yyMassZ          from SPheno:     " << yyMassZ   << endl;   //
    cout << "  --->  yyG_F            from SPheno:     " << yyG_F   << endl;   //
-   //}
+   }
+	 else if( yyCalculator == SOFTSUSY ) {
+	 		cout << "  --->  yyMassZ          from SoftSusy:   " << yyMassZ   << endl;   //
+			cout << "  --->  yyG_F            from SoftSusy:   " << yyG_F   << endl;   //
+	}
+	 //}
    //------------------------------------------------------------------------------------------
    if (yyRelicDensityCalculator == MICROMEGAS) {
       cout << "  --->  yyOmega          from MicrOmegas: " << yyOmega  << endl;   //     relic density
@@ -7669,6 +7939,51 @@ int   ReadLesHouches()
 
 	 // exit (0);
       }
+			else if ( yyCalculator == SOFTSUSY) {
+		    /*system("mv LesHouches.out LesHouches.old");
+				char line[200];
+				FILE *Old = fopen("LesHouches.old","r");
+				FILE *New = fopen("LesHouches.out","w+");
+				for(int i = 0; i< 152; i++ ) {
+					fgets(line, 200, Old);
+					if( i == 4) {
+						fputs("     2 v3.0.9\n", New);
+					}
+					else
+					fputs(line, New);
+				}
+				fclose(Old);
+				fclose(New);
+				if( yyFitModel == mSUGRA ) {
+					system("tail -147 LesHouches.old > LesHouches.out");
+				}
+			
+				else if( yyFitModel == AMSB ) {
+					system("tail -146 LesHouches.old > LesHouches.out");
+				}
+				else if( yyFitModel == GMSB ) {
+					system("tail -149 LesHouches.old > LesHouches.out");			
+				}
+				else if( yyFitModel == MSSM) {
+					system("tail -169 LesHouches.old > LesHouches.out");
+				}
+				*/
+		//		system("mv susyhit_slha.out susyhit_slha.old");
+		//		system("tail -573 susyhit_slha.old > susyhit_slha.out");
+				yyin = fopen("susyhit_slha.out", "r");
+		    if( !yyin ) {
+			    cerr << "Couldnt open susyhit_slha.out" << endl;
+		  		yyCalculatorError = true;
+					return 1;
+				}
+				yyInputFileLineNo = 1;
+				rc = yyparse();
+				fclose(yyin);
+				//system("mv LesHouches.out.last LesHouches.out.last2");
+				//system("mv LesHouches.out LesHouches.out.last");
+				//system("mv LesHouches.in LesHouches.in.last");
+			}
+																									 
       else {
 	 cerr<<"Only SPHENO is implemented"<<endl;
 	 exit(EXIT_FAILURE);

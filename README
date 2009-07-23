@@ -42,3 +42,15 @@ $Name$
   Thus Fittino can be started with
 
   ./fittino inputs/fittino.in.shortexample
+
+
+3. Running with SoftSUSY/SUSYHIT
+--------------------------------
+
+- Get SoftSUSY (http://projects.hepforge.org/softsusy/) and SUSYHIT (http://lappweb.in2p3.fr/~muehlleitner/SUSY-HIT/)
+
+- Set "Calculator" to SOFTSUSY in the inputfile with the respective path
+- Set "DecayCalculator" to SUSYHIT in the inputfile with the respective path
+
+- GMSB and mSUGRA should work without any modifications to SoftSUSY or SUSYHIT
+- AMSB fits will require a change in SoftSUSY, as it seems. MSSM doesnt work yet.

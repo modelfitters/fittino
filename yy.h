@@ -104,6 +104,7 @@ extern vector<ScanParameter> yyScanPar;
 extern vector<parameter_t> yyCorrelatedErr;
 
 extern string yyCalculatorPath;
+extern string yyDecayCalculatorPath;
 extern string yyRelicDensityCalculatorPath;
 extern string yyLEOCalculatorPath;
 extern string yyDashedLine;

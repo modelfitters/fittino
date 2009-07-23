@@ -168,10 +168,12 @@ bool          yyRequireNeut1LSP = false;
 bool          yyPreliminaryScan = false;
 
 unsigned int yyCalculator;
+unsigned int yyDecayCalculator;
 unsigned int yyRelicDensityCalculator;
 unsigned int yyLEOCalculator;
 
 string       yyCalculatorPath = "";
+string			 yyDecayCalculatorPath = "";
 string       yyRelicDensityCalculatorPath = "";
 string       yyLEOCalculatorPath = "";
 string       yyDashedLine = "------------------------------------------------------------";
@@ -290,9 +292,11 @@ struct correrrorstruct {
 %token <real> T_NUMBER
 %token <integer> T_ENERGYUNIT T_SWITCHSTATE T_CROSSSECTIONUNIT
 %token T_ERRORSIGN T_BRA T_KET T_COMMA T_GOESTO T_ALIAS T_NOFIT T_NOFITLEO T_SCALING
-%token T_BLOCK T_SCALE T_DECAY T_BR T_LEO T_XS T_CALCULATOR T_MARKOVINTERFACEFILEPATH T_RELICDENSITYCALCULATOR T_LEOCALCULATOR T_XSBR T_BRRATIO
+%token T_BLOCK T_SCALE T_DECAY T_BR T_LEO T_XS T_CALCULATOR T_DECAYCALCULATOR T_MARKOVINTERFACEFILEPATH T_RELICDENSITYCALCULATOR T_LEOCALCULATOR T_XSBR T_BRRATIO
 %token <name> T_COMPARATOR T_UNIVERSALITY T_PATH T_NEWLINE
- 
+%token <name> T_VERSIONTAGSOSY
+%token <name> T_VERSIONTAGSDEC
+%token <name> T_VERSIONTAGHDEC
 %type <name>   sentence
 %type <real>   value err
 %type <correrrorptr> correrr
@@ -1326,6 +1330,9 @@ input:
 		   if (!strcmp($3, "SPHENO")) {
 		      yyCalculator = SPHENO;
 		   }
+			 if (!strcmp($3, "SOFTSUSY")) {
+					yyCalculator = SOFTSUSY;
+			 }
 		   if (!strcmp($3, "SUSPECT")) {
 		      yyCalculator = SUSPECT;
 		   }
@@ -1341,11 +1348,36 @@ input:
 		   if (!strcmp($3, "SPHENO")) {
 		      yyCalculator = SPHENO;
 		   }
+			 if( !strcmp($3, "SOFTSUSY")) {
+					yyCalculator = SOFTSUSY;
+			 }
 		   if (!strcmp($3, "SUSPECT")) {
 		      yyCalculator = SUSPECT;
 		   }
 	           yyCalculatorPath = $4;
 	      }
+			| input T_DECAYCALCULATOR T_WORD
+			{
+				  yyInputFileLine.prevalue = "DecayCalculator";
+					yyInputFileLine.prevalue += "\t";
+					yyInputFileLine.prevalue += $3;
+			
+				 if( !strcmp($3, "SUSYHIT" )) {
+						yyDecayCalculator = SUSYHIT;
+				 }
+			}
+			| input T_DECAYCALCULATOR T_WORD T_PATH
+			{
+				yyInputFileLine.prevalue = "DecayCalculator";
+				yyInputFileLine.prevalue += "\t";
+				yyInputFileLine.prevalue += $3;
+				yyInputFileLine.prevalue += " ";
+				yyInputFileLine.prevalue += $4;
+				if( !strcmp($3, "SUSYHIT") ) {
+					yyDecayCalculator = SUSYHIT;
+				}
+				yyDecayCalculatorPath = $4;
+			}
 	    | input T_RELICDENSITYCALCULATOR T_WORD
 	      {
                    yyInputFileLine.prevalue  = "RelicDensityCalculator";
@@ -3907,7 +3939,11 @@ block:      T_BLOCK T_WORD T_NEWLINE parameters
                       }
                   }
 //========================================================================
-                  else if (!strcmp($2, "SPINFO")) {
+//									else if (!strcmp($2, "DCINFO" )) {
+//											cout << "Ignoring blcok DCINFO" << endl;
+//									}
+//========================================================================
+									else if (!strcmp($2, "SPINFO") || !strcmp($2, "DCINFO")) {
 //		      cout << "tmpStrings.size()" << tmpStrings.size() << endl;
 //		      cout << "tmpNumbers.size()" << tmpNumbers.size() << endl;
                       for (unsigned int i=0; i<tmpStrings.size(); i++) {
@@ -3919,7 +3955,7 @@ block:      T_BLOCK T_WORD T_NEWLINE parameters
                               break;
                           case 2:
                               strcpy(yy_spectrum_calc_version,tmpStrings[i].tmpname);
-//			      printf("calculator version = %s\n", yy_spectrum_calc_version);
+//		      printf("calculator version = %s\n", yy_spectrum_calc_version);
                               break;
                           case 3:
                               strcat(yy_warnings,tmpStrings[i].tmpname);
@@ -3947,7 +3983,7 @@ block:      T_BLOCK T_WORD T_NEWLINE parameters
 		    // cout << "Reading SPhenoINFO " << endl;
 		  }
 //========================================================================
-                  else if (!strcmp($2, "alpha")) {
+                  else if (!strcmp($2, "alpha") || !strcmp($2, "ALPHA")) {
 		      cout << "Ignoring block alpha" << endl;
 		  }
 //========================================================================
@@ -3982,7 +4018,7 @@ block:      T_BLOCK T_WORD T_NEWLINE parameters
                   else if (!strcmp($2, "IMSNmix")) {
 		      cout << "Ignoring block IMSNmix" << endl;
 		  }
-//========================================================================
+//==============/==========================================================
                   else if (!strcmp($2, "EXTPAR")) {
                       for (unsigned int i=0; i<tmpParams.size(); i++) {
             
@@ -4020,6 +4056,9 @@ block:      T_BLOCK T_WORD T_NEWLINE parameters
                           case 24:
                               yy_MassA =  tmpParams[i][1];
                               break;
+													case 26:
+															yy_MassA = tmpParams[i][1];
+															break;
                           case 31:
                               yy_mse1L =  tmpParams[i][1];
                               break;
@@ -4266,24 +4305,24 @@ block:      T_BLOCK T_WORD T_NEWLINE parameters
 		    tmpNumbers.clear();
 		  }
 //========================================================================
-		  else if (!strcmp($2, "stopmix")) {
+		  else if (!strcmp($2, "stopmix") || !strcmp($2, "STOPMIX")) {
 		     //		    for (unsigned int i=0; i<tmpParams.size(); i++) {
 
 		     //		    }
 		  }
-		  else if (!strcmp($2, "sbotmix")) {
+		  else if (!strcmp($2, "sbotmix") || !strcmp($2, "SBOTMIX")) {
 		     //		    for (unsigned int i=0; i<tmpParams.size(); i++) {
 
 		     //		    }
 		  }
-		  else if (!strcmp($2, "staumix")) {
+		  else if (!strcmp($2, "staumix") || !strcmp($2, "STAUMIX")) {
 		     yyThetaStau = TMath::ACos(tmpParams[0][2]);
 
 		     //		    for (unsigned int i=0; i<tmpParams.size(); i++) {
 
 		     //		    }
 		  }
-		  else if (!strcmp($2, "Nmix")) {
+		  else if (!strcmp($2, "Nmix") || !strcmp($2, "nmix") || !strcmp($2, "NMIX")) {
 		     yyN11 = tmpParams[0][2];
 		     yyN12 = tmpParams[1][2];
 		     yyN13 = tmpParams[2][2];
@@ -4292,12 +4331,12 @@ block:      T_BLOCK T_WORD T_NEWLINE parameters
 
 		     //		    }
 		  }
-		  else if (!strcmp($2, "Umix")) {
+		  else if (!strcmp($2, "Umix") || !strcmp($2, "UMIX")) {
 		     //		    for (unsigned int i=0; i<tmpParams.size(); i++) {
 
 		     //		    }
 		  }
-		  else if (!strcmp($2, "Vmix")) {
+		  else if (!strcmp($2, "Vmix") || !strcmp($2, "VMIX")) {
 		     //		    for (unsigned int i=0; i<tmpParams.size(); i++) {
 
 		     //		    }
@@ -4345,7 +4384,7 @@ block:      T_BLOCK T_WORD T_NEWLINE parameters
 	    //========================================================================
 decay:      T_DECAY T_NUMBER T_NUMBER T_NEWLINE parameters
 	    {
-	       //                  printf("Reading decay %i...\n", (int)$2);
+	     //                    printf("Reading decay %i...\n", (int)$2);
 	       tmp_branch.decays.clear();
 	       //                  cout << "branch cleared, tmpParams.size() = "<<tmpParams.size() << endl;
 	       if (tmpParams.size()>0) {
@@ -4362,7 +4401,7 @@ decay:      T_DECAY T_NUMBER T_NUMBER T_NEWLINE parameters
 		     tmp_branch.decays.push_back(tmpVec);
 		  }
 		  tmp_branch.TWidth = $3;
-		  // cout << "filling width " << tmp_branch.TWidth << " for particle " << (int)$2 << endl;
+//		   cout << "filling width " << tmp_branch.TWidth << " for particle " << (int)$2 << endl;
 		  branching_ratios[(int)$2] = tmp_branch;
 	       } else {
 		  tmp_branch.TWidth = 0.;	
@@ -4480,8 +4519,8 @@ parameters: /* empty */
 	    }
 	    | parameters T_NUMBER sentence T_NEWLINE
 	    {
-//	       	         cout << "parsing string for tmpStrings" << endl;
-//	                        cout << "$3 = " << $3 << "$2 = " << $2 << endl;
+	//       	         cout << "parsing string for tmpStrings" << endl;
+//                        cout << "$3 = " << $3 << "$2 = " << $2 << endl;
 	       if (!strncmp($3,"INF",3) || !strncmp($3,"inf",3) || !strncmp($3,"Inf",3)
 		   || !strncmp($3,"NAN",3) || !strncmp($3,"nan",3) || !strncmp($3,"Nan",3) )
 //               if (!strncmp($3,"INF",3))
@@ -4500,6 +4539,21 @@ parameters: /* empty */
 	    {
 
 	    }
+			| parameters T_NUMBER T_VERSIONTAGSOSY T_NEWLINE 
+			{
+				strcpy(tmpstr.tmpname,$3);
+			  tmpStrings.push_back(tmpstr);
+			  tmpNumbers.push_back((int)$2);
+				strcpy($3,"");
+			}
+			| parameters T_NUMBER T_VERSIONTAGSDEC T_VERSIONTAGHDEC T_NEWLINE 
+			{
+				strcpy(tmpstr.tmpname, $3);
+				tmpStrings.push_back(tmpstr);
+				tmpNumbers.push_back((int)$2);
+				strcpy($3,"");
+			}
+
 	    ;
 
 	    //===================================================================
