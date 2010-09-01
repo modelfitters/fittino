@@ -154,11 +154,11 @@ fixParameter massTop     171.3        GeV
 fixParameter massTau     1.77684      GeV
 fixParameter SignMu        1
 
-fitParameter M0             500.      GeV +-  59.4576   GeV 
-fitParameter M12            600.      GeV +-  267.857   GeV
-fitParameter A0            -600.      GeV +-  793.426   GeV 
-fitParameter TanBeta         40.          +-  8.0241	  
-fitParameter QEWSB         1000.      GeV +-  1.18915   GeV  
+fitParameter M0             500.      GeV +-  156.1   GeV 
+fitParameter M12            600.      GeV +-  280.0   GeV
+fitParameter A0            -600.      GeV +-  334.5   GeV 
+fitParameter TanBeta         40.          +-  3.9825	  
+fitParameter QEWSB         1000.      GeV +-  16.91   GeV  
 
 ################################################################################
 ### Switches                                                                 ###
