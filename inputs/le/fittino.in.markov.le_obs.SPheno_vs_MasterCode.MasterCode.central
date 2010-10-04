@@ -1,0 +1,118 @@
+################################################################################
+### Fittino input file                                                       ###
+################################################################################
+
+################################################################################
+### Fit of measured LE observables to mSUGRA model                          ###
+################################################################################
+
+################################################################################
+### Observables                                                              ###
+################################################################################
+
+### LE (low energy) observables
+
+
+LEObs ( Bsg_npf        )      1.117   +- 0.076   +- 0.082 +- 0.050    alias  1 # [11]
+LEObs ( dm_s_npf       )      1.11    +- 0.01    +- 0.32              alias  2 # [1]
+LEObs ( B_smm_npf      ) <    4.7E-8                      +- 0.02E-8  alias  3 # [12]
+
+## OBSERVABLE COMMENTED OUT BECAUSE IN THE LAST SPHENO VERSION (.50), THIS OBSERVABLE BECAME A RATIO, AND THE SM PREDICTION IS NOT A FIXED NUMBER,
+## IT USES THE FORMULA W.HOU, PRD48 (1993) 2342
+## BF(B->taunu), not the ratio to the SM prediction
+##LEObs ( Btn_npf        )      1.74    +- 0.53                         alias  4 # [1]
+
+LEObs ( gmin2m_npf     )     25.5E-10 +- 8.0E-10      alias  7 # [14]
+LEObs ( Omega_npf      )      0.113  +- 0.003    alias 20 # [15]
+
+
+### SM observables
+
+alphaem    127.925      GeV +- 0.016      GeV # [6]
+G_F          1.16637E-5     +- 0.00001E-5     # [6]
+alphas       0.1176     GeV +- 0.0020     GeV # [6]
+massZ       91.1876     GeV +- 0.0021     GeV # [6]
+massBottom   4.20       GeV +- 0.17       GeV # [6]
+massTop    171.3        GeV +- 1.2        GeV # [6]
+massTau      1.77684    GeV +- 0.00017    GeV # [6]
+## massCharm    1.27       GeV +- 0.11       GeV # [6] ### We are not including this because SPheno is returning weird values
+
+# [1] HFAG 2008, p167, Table 122, [arXiv:0808.1297v3 [hep-ex]]
+# [6] PDG 2009
+# [11] HFAG 2008, p166, Table 120 [arXiv:0808.1297v3 [hep-ex]]
+# [12] HFAG 2008, p170, Table 127 [arXiv:0808.1297v3 [hep-ex]]
+# [14] Eur.Phys.J.C66:1-9,2010, Davier et al, e+e- -> pi+pi- hadronic contributions from BaBar [arXiv:0908.4300v2 [hep-ph]]
+# [15] PDG 2009, combination of WMAP5+BAO+SN
+
+
+ ################################################################################
+ ### Parameters                                                               ###
+ ################################################################################
+
+RequireNeut1LSP	on
+
+### mSUGRA parameters at last paper bestfit point
+
+fixParameter massW        80.399      GeV 
+fixParameter alphaem     127.925      GeV
+fixParameter G_F         1.16637E-5
+fixParameter alphas      0.1176     GeV
+fixParameter massZ       91.1876     GeV
+fixParameter massBottom  4.20       GeV
+fixParameter massTop     171.3        GeV
+fixParameter massTau     1.77684    GeV
+fixParameter SignMu        1
+fitParameter QEWSB      1000          GeV +- 10 GeV
+fitParameter M0          76.2       GeV +-  0.454359  GeV
+fitParameter M12         331.5      GeV +-  1.88976   GeV
+fitParameter A0          383.8      GeV +-  16.5986   GeV
+fitParameter TanBeta      13.2          +-  0.124798
+
+
+################################################################################
+### Switches                                                                 ###
+################################################################################
+
+fitModel                       mSUGRA
+
+LoopCorrections                on
+ISR                            on
+UseGivenStartValues            on
+FitAllDirectly                 on
+CalcPullDist                   off
+CalcIndChisqContr              off
+BoundsOnX                      off
+ScanX                          off
+SepFitTanbX                    off
+SepFitTanbMu                   off
+SepFitmA	               off
+Calculator                     SPHENO ./theorycodes_que_usare_a_partir_del_8_Sept_2010/SPheno
+LEOCalculator                  NPFITTER ./theorycodes_que_usare_a_partir_del_8_Sept_2010/NPpredict.exe
+UseFullCKMMatrix               off
+UseMinos                       off
+UseHesse                       off
+NumberOfMinimizations          1
+ErrDef                         1.0
+NumberPulls                    1
+GetContours                    off
+
+UseHiggsBounds                 on
+
+CalculateSPhenoCrossSections   off
+
+UseMarkovChains                on
+MarkovChainReadjustWidth       off
+MarkovChainReadjustWidthPeriod 500
+MaxMarkovChain                 40000
+MarkovInterfaceFilePath        ./markov_interface_file_folder/fittino.in.simann.le_obs.only.4paras.bestfit_MasterCodeOnly_2010_comparison_SPheno_vs_NPF_central
+
+MinuitStrategy	               2
+MachinePrecision               1e-8
+
+Verbose                        off
+
+ScanParameters                 off
+
+RequireNeut1LSP                on 
+PerformFit                     on
+#RandomGeneratorSeed            -1

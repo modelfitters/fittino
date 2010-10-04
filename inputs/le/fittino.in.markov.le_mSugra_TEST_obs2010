@@ -179,8 +179,8 @@ ScanX                          off
 SepFitTanbX                    off
 SepFitTanbMu                   off
 SepFitmA	               off
-Calculator                     SPHENO ./SPheno
-LEOCalculator                  NPFITTER ./NPpredict.exe
+Calculator                     SPHENO ./theorycodes_que_usare_a_partir_del_8_Sept_2010/SPheno3.0.beta51/bin/SPheno
+LEOCalculator                  NPFITTER ./theorycodes_que_usare_a_partir_del_8_Sept_2010/mastercode/NPFitter.mm2.2/masterfitter/NPpredict.exe
 UseFullCKMMatrix               off
 UseMinos                       off
 UseHesse                       off
@@ -196,7 +196,7 @@ UseMarkovChains                off
 MarkovChainReadjustWidth       off
 MarkovChainReadjustWidthPeriod 500
 MaxMarkovChain                 80000
-MarkovInterfaceFilePath        /PUT/YOUR/OWN/PATH/fittino.in.markov.le_mSugra_allObs_central_obs2010
+MarkovInterfaceFilePath        ./markov_interface_file_folder/fittino.in.markov.le_mSugra_allObs_central_obs2010
 
 MinuitStrategy	               2
 MachinePrecision               1e-8
