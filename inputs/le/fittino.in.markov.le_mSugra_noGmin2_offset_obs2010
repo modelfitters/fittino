@@ -157,7 +157,7 @@ fixParameter SignMu        1
 
 fitParameter M0            500.      GeV +-  0.312649  GeV 
 fitParameter M12           600.      GeV +-  1.16213   GeV
-fitParameter A0          - 600.      GeV +-  50.4231   GeV 
+fitParameter A0          -600.      GeV +-  50.4231   GeV 
 fitParameter TanBeta        40.          +-  0.222143	  
 fitParameter QEWSB        1000.      GeV +-  0.52799   GeV  
 
