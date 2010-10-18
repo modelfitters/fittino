@@ -44,22 +44,15 @@ LEObs ( Klnu_npf       )      1.008   +- 0.014                        alias  6 #
 
 ### SM observables
 
-alphaem    127.925      GeV +- 0.016      GeV # [3]
-G_F          1.16637E-5     +- 0.00001E-5     # [4]
-alphas       0.1176     GeV +- 0.0020     GeV # [4]
-massZ       91.1875     GeV +- 0.0021     GeV # [2]
-massBottom   4.20       GeV +- 0.17       GeV # [5]
-massTop    172.4        GeV +- 1.2        GeV # [1]
+
+alphaem    127.925      GeV +- 0.016      GeV # [6]
+G_F          1.16637E-5     +- 0.00001E-5     # [6]
+alphas       0.1176     GeV +- 0.0020     GeV # [6]
+massZ       91.1876     GeV +- 0.0021     GeV # [6]
+massBottom   4.20       GeV +- 0.17       GeV # [6]
+massTop    171.3        GeV +- 1.2        GeV # [6]
 massTau      1.77684    GeV +- 0.00017    GeV # [6]
-
-massCharm    1.27       GeV +- 0.11       GeV # [5]
-
-# [1] Buchmueller et al. arXiv:0808.4128v1
-# [2] Buchmueller et al. arXiv:0707.3447v2
-# [3] PDG 2008 Electroweak model and constraints on new physics (Rev.)
-# [4] PDG 2008 Physical constants (Rev.)
-# [5] PDG 2008 Summary Tables: Quarks
-# [6] PDG 2008 Summary Tables: Leptons
+massCharm    1.27       GeV +- 0.11       GeV # [6]
 
 ### Unfitted SUSY masses
 
@@ -143,13 +136,13 @@ correlationCoefficient A_fbc_npf A_c_npf 0.04
 
 ### GMSB parameters
 
-fixParameter alphaem       127.925      GeV
-fixParameter G_F             1.16637E-5
-fixParameter alphas          0.1176     GeV
-fixParameter massZ          91.1875     GeV
-fixParameter massBottom      4.20       GeV
-fixParameter massTop       172.4        GeV
-fixParameter massTau         1.77684    GeV
+fixParameter alphaem     127.925      GeV
+fixParameter G_F         1.16637E-5
+fixParameter alphas      0.1176       GeV
+fixParameter massZ       91.1876      GeV
+fixParameter massBottom  4.20         GeV
+fixParameter massTop     171.3        GeV
+fixParameter massTau     1.77684      GeV
 
 fixParameter SignMu          1
 fixParameter N5              1
