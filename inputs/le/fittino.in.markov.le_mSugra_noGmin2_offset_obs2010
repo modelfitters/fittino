@@ -23,7 +23,7 @@ LEObs ( dm_k_npf       )      0.92    +- 0.14                         alias 24 #
 LEObs ( sigma_had0_npf )      41.540   +- 0.037                       alias 23 # [5]
 LEObs ( Massh0_npf     ) >  114.4                         +- 3.0      alias 19 # [6]
 LEObs ( A_fbl_npf      )      0.0171 +- 0.0010                        alias 22 # [5]
-LEObs ( A_l_npf        )      0.1489  +- 0.0015                       alias 18 # [7]
+LEObs ( A_l_npf        )      0.1513  +- 0.0021                       alias 18 # [7]
 LEObs ( R_l_npf        )     20.767   +- 0.025                        alias 11 # [5]
 LEObs ( R_b_npf        )      0.21629 +- 0.00066                      alias 12 # [8]
 LEObs ( R_c_npf        )      0.1721  +- 0.003                        alias 13 # [8]
@@ -100,12 +100,13 @@ correlationCoefficient sigma_had0_npf R_l_npf 0.183
 correlationCoefficient sigma_had0_npf A_fbl_npf 0.006
 correlationCoefficient R_l_npf A_fbl_npf -0.056
 
-# Table 7.6
-correlationCoefficient A_l_npf A_b_npf -0.42
-correlationCoefficient A_l_npf A_c_npf -0.10
-correlationCoefficient A_b_npf A_c_npf 0.15
+# Z paper, p 171, 7.1 & 7.2
+correlationCoefficient A_l_npf A_b_npf 0.09
+correlationCoefficient A_l_npf A_c_npf 0.05
+
 
 # Table 5.11
+correlationCoefficient A_b_npf A_c_npf 0.11
 correlationCoefficient R_b_npf R_c_npf   -0.18
 correlationCoefficient R_b_npf A_fbb_npf -0.10
 correlationCoefficient R_b_npf A_fbc_npf 0.07

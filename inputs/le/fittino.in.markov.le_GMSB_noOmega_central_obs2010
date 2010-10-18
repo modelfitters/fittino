@@ -23,7 +23,7 @@ LEObs ( dm_k_npf       )      0.92    +- 0.14                         alias 24 #
 LEObs ( sigma_had0_npf )      41.540   +- 0.037                       alias 23 # [5]
 LEObs ( Massh0_npf     ) >  114.4                         +- 3.0      alias 19 # [6]
 LEObs ( A_fbl_npf      )      0.0171 +- 0.0010                        alias 22 # [5]
-LEObs ( A_l_npf        )      0.1489  +- 0.0015                       alias 18 # [7]
+LEObs ( A_l_npf        )      0.1513  +- 0.0021                       alias 18 # [7]
 LEObs ( R_l_npf        )     20.767   +- 0.025                        alias 11 # [5]
 LEObs ( R_b_npf        )      0.21629 +- 0.00066                      alias 12 # [8]
 LEObs ( R_c_npf        )      0.1721  +- 0.003                        alias 13 # [8]
@@ -97,6 +97,45 @@ nofit massNeutralino3 -404.134 GeV +-  4.0  GeV
 nofit massNeutralino4  417.037 GeV +-  2.3  GeV
 nofit massChargino1    184.132 GeV +-  0.55 GeV
 nofit massChargino2    418.495 GeV +-  3.0  GeV
+
+########################
+#correlations
+#######################
+
+# Table 2.13 with lepton universality
+correlationCoefficient massZ GammaZ_npf -0.023
+correlationCoefficient massZ sigma_had0_npf -0.045
+correlationCoefficient massZ R_l_npf   0.033     
+correlationCoefficient massZ A_fbl_npf 0.0171
+correlationCoefficient GammaZ_npf sigma_had0_npf -0.297
+correlationCoefficient GammaZ_npf R_l_npf   0.004
+correlationCoefficient GammaZ_npf A_fbl_npf 0.003
+correlationCoefficient sigma_had0_npf R_l_npf 0.183
+correlationCoefficient sigma_had0_npf A_fbl_npf 0.006
+correlationCoefficient R_l_npf A_fbl_npf -0.056
+
+# Z paper, p 171, 7.1 & 7.2
+correlationCoefficient A_l_npf A_b_npf 0.09
+correlationCoefficient A_l_npf A_c_npf 0.05
+
+
+# Table 5.11
+correlationCoefficient A_b_npf A_c_npf 0.11
+correlationCoefficient R_b_npf R_c_npf   -0.18
+correlationCoefficient R_b_npf A_fbb_npf -0.10
+correlationCoefficient R_b_npf A_fbc_npf 0.07
+correlationCoefficient R_b_npf A_b_npf  -0.08
+correlationCoefficient R_b_npf A_c_npf   0.04
+correlationCoefficient R_c_npf A_fbb_npf 0.04
+correlationCoefficient R_c_npf A_fbc_npf -0.06
+correlationCoefficient R_c_npf A_b_npf 0.04
+correlationCoefficient R_c_npf A_c_npf -0.06
+correlationCoefficient A_fbb_npf A_fbc_npf 0.15
+correlationCoefficient A_fbb_npf A_b_npf 0.06
+correlationCoefficient A_fbb_npf A_c_npf 0.01
+correlationCoefficient A_fbc_npf A_b_npf -0.02
+correlationCoefficient A_fbc_npf A_c_npf 0.04
+
 
 ################################################################################
 ### Parameters                                                               ###
