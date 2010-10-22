@@ -43,7 +43,7 @@ LEObs ( Klnu_npf       )      1.008   +- 0.014                        alias  6 #
 
 ### SM observables
 
-alphaem    127.925      GeV +- 0.016      GeV # [6]
+alphaem    128.962      GeV +- 0.014      GeV # [6]
 G_F          1.16637E-5     +- 0.00001E-5     # [6]
 alphas       0.1176     GeV +- 0.0020     GeV # [6]
 massZ       91.1876     GeV +- 0.0021     GeV # [6]
@@ -146,7 +146,7 @@ correlationCoefficient A_fbc_npf A_c_npf 0.04
  ################################################################################
 
 
-fixParameter alphaem     127.925      GeV
+fixParameter alphaem     128.962      GeV
 fixParameter G_F         1.16637E-5
 fixParameter alphas      0.1176       GeV
 fixParameter massZ       91.1876      GeV
