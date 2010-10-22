@@ -1,0 +1,209 @@
+################################################################################
+### Fittino input file                                                       ###
+################################################################################
+
+################################################################################
+### Fit of measured LE observables to mSUGRA model                          ###
+################################################################################
+
+################################################################################
+### Observables                                                              ###
+################################################################################
+
+### LE (low energy) observables
+
+
+LEObs ( gmin2m_npf     )     19.5E-10 +- 8.3E-10                      alias  7 # [14]
+LEObs ( Omega_npf      )      0.113  +- 0.003                         alias 20 # [15]
+#LEObs ( Omega_npf      )      0.1123  +- 0.0035                      alias 20 # [16]
+LEObs ( DmsDmd_npf     )      1.09    +- 0.01    +- 0.16              alias 27 # [1]
+LEObs ( B_dll_npf      ) <    1.8E-8                      +- 0.001E-8 alias 26 # [2]
+LEObs ( Kppinn_npf     )      < 4.5     +- 1.0E-10                    alias 25 # [4]
+LEObs ( dm_k_npf       )      0.92    +- 0.14                         alias 24 # [4]
+LEObs ( sigma_had0_npf )      41.540   +- 0.037                       alias 23 # [5]
+LEObs ( Massh0_npf     ) >  114.4                         +- 3.0      alias 19 # [6]
+LEObs ( A_fbl_npf      )      0.0171 +- 0.0010                        alias 22 # [5]
+LEObs ( A_l_npf        )      0.1513  +- 0.0021                       alias 18 # [7]
+LEObs ( R_l_npf        )     20.767   +- 0.025                        alias 11 # [5]
+LEObs ( R_b_npf        )      0.21629 +- 0.00066                      alias 12 # [8]
+LEObs ( R_c_npf        )      0.1721  +- 0.003                        alias 13 # [8]
+LEObs ( A_fbb_npf      )      0.0982  +- 0.0017                       alias 14 # [9]
+LEObs ( A_fbc_npf      )      0.0635  +- 0.0036                       alias 15 # [9]
+LEObs ( A_b_npf        )      0.923   +- 0.020                        alias 16 # [8]
+LEObs ( A_c_npf        )      0.670   +- 0.027                        alias 17 # [8]
+LEObs ( MassW_npf      )     80.398   +- 0.025            +- 0.010    alias  8 # [6]
+LEObs ( sin_th_eff_npf )      0.2324  +- 0.0012                       alias  9 # [10]
+LEObs ( GammaZ_npf     )   2495.2     +- 2.3              +- 1.0      alias 10 # [5]
+LEObs ( Bsg_npf        )      1.117   +- 0.076   +- 0.082 +- 0.050    alias  1 # [11]
+LEObs ( dm_s_npf       )      1.11    +- 0.01    +- 0.32              alias  2 # [1]
+LEObs ( B_smm_npf      ) <    4.7E-8                      +- 0.02E-8  alias  3 # [12]
+LEObs ( Btn_npf        )      1.74    +- 0.53                         alias  4 # [1]
+LEObs ( B_sXsll_npf    )      0.99    +- 0.32                         alias  5 # [13]
+LEObs ( Klnu_npf       )      1.008   +- 0.014                        alias  6 # [4]
+
+### SM observables
+
+alphaem    127.925      GeV +- 0.016      GeV # [6]
+G_F          1.16637E-5     +- 0.00001E-5     # [6]
+alphas       0.1176     GeV +- 0.0020     GeV # [6]
+massZ       91.1876     GeV +- 0.0021     GeV # [6]
+massBottom   4.20       GeV +- 0.17       GeV # [6]
+massTop    171.3        GeV +- 1.2        GeV # [6]
+massTau      1.77684    GeV +- 0.00017    GeV # [6]
+massCharm    1.27       GeV +- 0.11       GeV # [6]
+
+nofit massh0           112.888 GeV +-  0.05 GeV
+nofit massA0           374.228 GeV +-  1.3  GeV
+nofit massH0           374.465 GeV +-  1.3  GeV
+nofit massHplus        383.131 GeV +-  1.1  GeV
+nofit massSdownR       543.348 GeV +- 23.6  GeV
+nofit massSstrangeR    543.348 GeV +- 23.6  GeV
+nofit massScharmL      561.54  GeV +-  9.8  GeV
+nofit massScharmR      543.348 GeV +- 23.6  GeV
+nofit massSupL         561.539 GeV +-  9.8  GeV
+nofit massScharmL      561.539 GeV +-  9.8  GeV
+nofit massSupR         543.35  GeV +- 11.0  GeV
+nofit massSdownR       543.35  GeV +- 11.0  GeV
+nofit massSstrangeR    543.35  GeV +- 11.0  GeV
+nofit massScharmR      543.35  GeV +- 11.0  GeV
+nofit massSbottom1     502.059 GeV +-  5.7  GeV
+nofit massSbottom2     541.81  GeV +-  6.2  GeV
+nofit massStop1        365.819 GeV +-  2.0  GeV
+nofit massStop2        600.037 GeV +- 20.0  GeV
+nofit massSelectronL   190.209 GeV +-  0.2  GeV
+nofit massSelectronR   124.883 GeV +-  0.05 GeV
+nofit massSmuL         190.209 GeV +-  0.2  GeV
+nofit massSmuR	       124.883 GeV +-  0.05 GeV
+nofit massSnueL	       172.947 GeV +-  0.7  GeV
+nofit massSmuL         190.237 GeV +-  0.5  GeV
+nofit massSmuR	       124.837 GeV +-  0.2  GeV
+nofit massStau1	       107.292 GeV +-  0.3  GeV
+nofit massStau2	       195.290 GeV +-  1.1  GeV
+nofit massGluino       603.639 GeV +-  6.4  GeV
+nofit massNeutralino1   97.766 GeV +-  0.05 GeV
+nofit massNeutralino2  184.345 GeV +-  0.08 GeV
+nofit massNeutralino3 -404.134 GeV +-  4.0  GeV
+nofit massNeutralino4  417.037 GeV +-  2.3  GeV
+nofit massChargino1    184.132 GeV +-  0.55 GeV
+nofit massChargino2    418.495 GeV +-  3.0  GeV
+
+
+# Table 2.13 with lepton universality
+correlationCoefficient massZ GammaZ_npf -0.023
+correlationCoefficient massZ sigma_had0_npf -0.045
+correlationCoefficient massZ R_l_npf   0.033     
+correlationCoefficient massZ A_fbl_npf 0.0171
+correlationCoefficient GammaZ_npf sigma_had0_npf -0.297
+correlationCoefficient GammaZ_npf R_l_npf   0.004
+correlationCoefficient GammaZ_npf A_fbl_npf 0.003
+correlationCoefficient sigma_had0_npf R_l_npf 0.183
+correlationCoefficient sigma_had0_npf A_fbl_npf 0.006
+correlationCoefficient R_l_npf A_fbl_npf -0.056
+
+# Z paper, p 171, 7.1 & 7.2
+correlationCoefficient A_l_npf A_b_npf 0.09
+correlationCoefficient A_l_npf A_c_npf 0.05
+
+
+# Table 5.11
+correlationCoefficient A_b_npf A_c_npf 0.11
+correlationCoefficient R_b_npf R_c_npf   -0.18
+correlationCoefficient R_b_npf A_fbb_npf -0.10
+correlationCoefficient R_b_npf A_fbc_npf 0.07
+correlationCoefficient R_b_npf A_b_npf  -0.08
+correlationCoefficient R_b_npf A_c_npf   0.04
+correlationCoefficient R_c_npf A_fbb_npf 0.04
+correlationCoefficient R_c_npf A_fbc_npf -0.06
+correlationCoefficient R_c_npf A_b_npf 0.04
+correlationCoefficient R_c_npf A_c_npf -0.06
+correlationCoefficient A_fbb_npf A_fbc_npf 0.15
+correlationCoefficient A_fbb_npf A_b_npf 0.06
+correlationCoefficient A_fbb_npf A_c_npf 0.01
+correlationCoefficient A_fbc_npf A_b_npf -0.02
+correlationCoefficient A_fbc_npf A_c_npf 0.04
+
+
+# [1] HFAG 2008, p167, Table 122, [arXiv:0808.1297v3 [hep-ex]]
+# [2] HFAG 2008, p176 Table 45, [arXiv:0808.1297v3 [hep-ex]]
+# [3] PDG 2009 for K+ decay
+# [4] Buchmueller et al. arXiv:0808.4128v1, for Klnu_npf ratio not measured from BF measurement
+# [5] Measurement at Z resonance, Phys.Rept.427:257,2006, p49, Table 2.13 [arXiv:hep-ex/0509008v3]
+# [6] PDG 2009 
+# [7] Measurement at Z resonance, Phys.Rept.427:257,2006,  p120, Table 7.6, [arXiv:hep-ex/0509008v3]
+# [8] Measurement at Z resonance, Phys.Rept.427:257,2006,  p108, Table 5.10, [arXiv:hep-ex/0509008v3]
+# [9] Measurement at Z resonance, Phys.Rept.427:257,2006,  p106, Table 5.9, [arXiv:hep-ex/0509008v3]
+# [10] Measurement at Z resonance, p113, formula 6.3, Phys.Rept.427:257,2006, [arXiv:hep-ex/0509008v3]
+# [11] HFAG 2008, p166, Table 120 [arXiv:0808.1297v3 [hep-ex]]
+# [12] HFAG 2008, p170, Table 127 [arXiv:0808.1297v3 [hep-ex]]
+# [13] Combination of Belle Phys.Rev.D72:092005,2005, BaBar Phys.Rev.Lett.93:081802,2004
+# [14] arXiv:1010.4180v1
+# [15] PDG 2009, combination of WMAP5+BAO+SN
+# [16] 7years analysis of WMAP http://lambda.gsfc.nasa.gov/product/map/dr4/pub_papers/sevenyear/basic_results/wmap_7yr_basic_results.pdf
+
+
+ ################################################################################
+ ### Parameters                                                               ###
+ ################################################################################
+
+
+fixParameter alphaem     127.925      GeV
+fixParameter G_F         1.16637E-5
+fixParameter alphas      0.1176       GeV
+fixParameter massZ       91.1876      GeV
+fixParameter massBottom  4.20         GeV
+fixParameter massTop     171.3        GeV
+fixParameter massTau     1.77684      GeV
+fixParameter SignMu        1
+
+fitParameter M0            500.      GeV +-  0.454359  GeV 
+fitParameter M12           600.      GeV +-  1.88976   GeV
+fitParameter A0           -600.      GeV +-  16.5986   GeV 
+fitParameter TanBeta        40.          +-  0.124798	  
+fitParameter QEWSB        1000.       GeV +-  0.92746   GeV  
+
+################################################################################
+### Switches                                                                 ###
+################################################################################
+
+fitModel                       mSUGRA
+
+LoopCorrections                on
+ISR                            on
+UseGivenStartValues            on
+FitAllDirectly                 on
+CalcPullDist                   off
+CalcIndChisqContr              off
+BoundsOnX                      off
+ScanX                          off
+SepFitTanbX                    off
+SepFitTanbMu                   off
+SepFitmA	               off
+Calculator                     SPHENO ./SPheno
+LEOCalculator                  NPFITTER ./NPpredict.exe
+UseFullCKMMatrix               off
+UseMinos                       off
+UseHesse                       off
+NumberOfMinimizations          1
+ErrDef                         1.0
+NumberPulls                    1
+GetContours                    off
+
+UseHiggsBounds                 on
+
+
+UseMarkovChains                on
+MarkovChainReadjustWidth       off
+MarkovChainReadjustWidthPeriod 500
+MaxMarkovChain                 80000
+#MarkovInterfaceFilePath        /PUT/YOUR/OWN/PATH/fittino.in.markov.le_mSugra_allObs_central_obs2010
+
+MinuitStrategy	               2
+MachinePrecision               1e-8
+
+Verbose                        off
+
+ScanParameters                 off
+
+RequireNeut1LSP                on 
+PerformFit                     off
+#RandomGeneratorSeed            -1
