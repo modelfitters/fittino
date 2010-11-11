@@ -4211,6 +4211,27 @@ void fitterFCN(Int_t &, Double_t *, Double_t &f, Double_t *x, Int_t iflag)
        }
      }
    }   
+   // find stop quark masses
+   double thisMStop1 = -1.;
+   double thisMStop2 = -1.;
+   for (unsigned int i = 0; i < yyMeasuredVec.size(); i++) {
+     if ( yyMeasuredVec[i].name == "massStop1" ) {
+       thisMStop1 = yyMeasuredVec[i].theovalue;
+       break;
+     }
+   }   
+   for (unsigned int i = 0; i < yyMeasuredVec.size(); i++) {
+     if ( yyMeasuredVec[i].name == "massStop2" ) {
+       thisMStop2 = yyMeasuredVec[i].theovalue;
+       break;
+     }
+   }   
+   if (thisMStop1 < 0. || thisMStop2 < 0.) {
+     cout << "mStop1 or mStop2 not found" << endl;
+     f = 111111111111.;
+     return;
+   }
+   double thisMmean = TMath::Sqrt(thisMStop1*thisMStop2);
 
    // Check whether QEWSB is within bounds
    if (mSquarkGluinoMax>0.) {
@@ -4218,13 +4239,14 @@ void fitterFCN(Int_t &, Double_t *, Double_t &f, Double_t *x, Int_t iflag)
        if (yyVerbose){
        cout << "QEWSB found fitted = " << x[ReturnFittedPosition("QEWSB")] << endl;
        }
-       if (x[ReturnFittedPosition("QEWSB")] > 4.*mSquarkGluinoMax ) {
+       if ( x[ReturnFittedPosition("QEWSB")] < 0.5*thisMmean || 
+	    x[ReturnFittedPosition("QEWSB")] > 2.0*thisMmean ) {
 	 if (yyVerbose){
-	 cout << "QEWSB out of dynamic bounds " << endl;
+	   cout << "QEWSB out of dynamic bounds " << endl;
 	 }
 	 f = 111111111111.;
 	 if (yyVerbose){
-	 cout << " f = " << f << endl;
+	   cout << " f = " << f << endl;
 	 }
 	 return;
        }
@@ -4233,13 +4255,14 @@ void fitterFCN(Int_t &, Double_t *, Double_t &f, Double_t *x, Int_t iflag)
        if (yyVerbose){
        cout << "QEWSB found in universality = " << ReturnUniversality("QEWSB")->universality << endl;
        }
-       if (x[ReturnFittedPosition(ReturnUniversality("QEWSB")->universality)] >  4.*mSquarkGluinoMax ) {
+       if ( x[ReturnFittedPosition(ReturnUniversality("QEWSB")->universality)] < 0.5*thisMmean ||
+	    x[ReturnFittedPosition(ReturnUniversality("QEWSB")->universality)] > 2.0*thisMmean ) {
 	 if (yyVerbose){
-	 cout << "QEWSB universality out of dynamic bounds " << endl;
+	   cout << "QEWSB universality out of dynamic bounds " << endl;
 	 }
 	 f = 111111111111.; 
 	 if (yyVerbose){
-	 cout << " f = " << f << endl;
+	   cout << " f = " << f << endl;
 	 }
 	 return;
        }
