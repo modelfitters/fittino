@@ -243,14 +243,14 @@ double        yyMachinePrecision = 1e-8; // Les Houches standard only uses 8 dig
 // BLOCK SPhenoLowEnergy
 double        yybsg    = -10000.;   //  1   BR(b -> s gamma) 
 double        yybsmm   = -10000.;   //  2   BR(b -> s mu+ mu-)
-double        yyB_smm  = -10000.;   //  3   BR(Bs -> mu+ mu-)
-double        yyB_utn  = -10000.;   //  4   BR(B_u -> tau nu)
-double        yydMB_d  = -10000.;   //  5   |Delta(M_Bd)| [ps^-1]
-double        yydMB_s  = -10000.;   //  6   |Delta(M_Bs)| [ps^-1]
-double        yygmin2e = -10000.;   // 10   Delta(g-2)_electron
-double        yygmin2m = -10000.;   // 11   Delta(g-2)_muon
-double        yygmin2t = -10000.;   // 12   Delta(g-2)_tau
-double        yydrho   = -10000.;   // 30   Delta(rho_parameter)
+double        yyB_smm  = -10000.;   //  5   BR(Bs -> mu+ mu-)
+double        yyB_utn  = -10000.;   //  6   BR(B_u -> tau nu)
+double        yydMB_d  = -10000.;   //  7   |Delta(M_Bd)| [ps^-1]
+double        yydMB_s  = -10000.;   //  8   |Delta(M_Bs)| [ps^-1]
+double        yygmin2e = -10000.;   // 20   Delta(g-2)_electron
+double        yygmin2m = -10000.;   // 21   Delta(g-2)_muon
+double        yygmin2t = -10000.;   // 22   Delta(g-2)_tau
+double        yydrho   = -10000.;   // 39   Delta(rho_parameter)
 //==============================================================
 // BLOCK MicrOmegas
 double        yyOmega  = -10000.;   //  1   relic density
@@ -4391,28 +4391,28 @@ if (yyVerbose){
 			else if ((unsigned int)tmpParams[i][0]==2) {
      			  yybsmm=tmpParams[i][1]*1E6;
 			}
-			else if ((unsigned int)tmpParams[i][0]==4) {
+			else if ((unsigned int)tmpParams[i][0]==5) {
      			  yyB_smm=tmpParams[i][1]*1E9;
 			}
-			else if ((unsigned int)tmpParams[i][0]==5) {
+			else if ((unsigned int)tmpParams[i][0]==6) {
      			  yyB_utn=tmpParams[i][1];
 			}
-			else if ((unsigned int)tmpParams[i][0]==6) {
+			else if ((unsigned int)tmpParams[i][0]==7) {
      			  yydMB_d=tmpParams[i][1];
 			}
-			else if ((unsigned int)tmpParams[i][0]==7) {
+			else if ((unsigned int)tmpParams[i][0]==8) {
      			  yydMB_s=tmpParams[i][1];
 			}
-			else if ((unsigned int)tmpParams[i][0]==10) {
+			else if ((unsigned int)tmpParams[i][0]==20) {
      			  yygmin2e=tmpParams[i][1]*1E12;
 			}
-			else if ((unsigned int)tmpParams[i][0]==11) {
+			else if ((unsigned int)tmpParams[i][0]==21) {
      			  yygmin2m=tmpParams[i][1]*1E9;
 			}
-			else if ((unsigned int)tmpParams[i][0]==12) {
+			else if ((unsigned int)tmpParams[i][0]==22) {
      			  yygmin2t=tmpParams[i][1]*1E9;
 			}
-			else if ((unsigned int)tmpParams[i][0]==30) {
+			else if ((unsigned int)tmpParams[i][0]==39) {
      			  yydrho=tmpParams[i][1];
 			}
 			else if ((unsigned int)tmpParams[i][0]==50) {
