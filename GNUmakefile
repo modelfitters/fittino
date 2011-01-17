@@ -24,6 +24,7 @@ ARCH              = $(shell uname)
 
 HBDIR             = $(HOME)/theorycodes/HiggsBounds-1.2.0/HiggsBounds-f77
 #HBDIR             = /afs/naf.desy.de/user/p/prudent/scratch/HiggsBounds-1.2.0/HiggsBounds-f77
+HBDIR=/afs/naf.desy.de/group/atlas/scratch/fittino/theorycodes/HiggsBounds-1.2.0/HiggsBounds-f77
 
 ROOTCFLAGS        = $(shell $(ROOTSYS)/bin/root-config --cflags)
 ROOTLIBS          = $(shell $(ROOTSYS)/bin/root-config --libs)

@@ -9025,12 +9025,15 @@ int   ReadLesHouches()
                  epmasses[1] = yyMass[yyMeasuredVec[i].daughters[2]];
                  epmasses[2] = yyMass[yyMeasuredVec[i].daughters[1]];
                } else if (yyMeasuredVec[i].id == 102 || 
-			  yyMeasuredVec[i].id == 105 ||
 			  yyMeasuredVec[i].id == 106) {
                  epmasses[0] = yyMass[yyMeasuredVec[i].daughters[0]];
                  epmasses[1] = yyMass[yyMeasuredVec[i].daughters[2]];
                  epmasses[2] = yyMass[yyMeasuredVec[i].daughters[1]];
                  epmasses[3] = yyMass[yyMeasuredVec[i].daughters[3]];
+	       } else if (yyMeasuredVec[i].id == 105) {
+                 epmasses[1] = yyMass[yyMeasuredVec[i].daughters[0]];
+                 epmasses[2] = yyMass[yyMeasuredVec[i].daughters[2]];
+                 epmasses[3] = yyMass[yyMeasuredVec[i].daughters[1]];
 	       }
 	       if (yyVerbose){
 	       std::cout << " endpoint number " << yyMeasuredVec[i].id - 100 << std::endl;
