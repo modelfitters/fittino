@@ -10970,6 +10970,24 @@ if (yyVerbose){
 
 vector <double> Fittino::widthOptimization( vector<double> x, vector<double> vm, vector<double> xp, vector<double> lb, vector <double> ub, vector<string> xNames )
 {
+  // Ntuple to monitor the optimization
+  TFile *widthOptimNtupFile = new TFile("widthOptimization.root","RECREATE");
+  char name[256];
+  char text[256];
+  char vars[65536];
+  Float_t varsVal[5000];
+  Float_t optimizPar[4];
+
+  sprintf ( name, "widthOptimization" );
+  sprintf ( text, "optimization of the Markov Chain" );
+  sprintf ( vars, "chi2:steps" );
+  for (unsigned int j=0; j < yyFittedVec.size(); j++ ) {
+    string parName = "P_"+yyFittedVec[j].name;
+    sprintf ( vars, "%s:%s", vars, parName.c_str() );
+  }
+  TNtuple *widthOptimNtuple = new TNtuple( name, text, vars );
+  TNtuple *widthVectorNtuple = new TNtuple( "widthVectorNtuple", "Optimization parameters", "width:success:maxStep:numChain" );
+
   // Fill input vectors
   int successes = 0;
   Double_t dummyfloat = 5.;
@@ -11009,7 +11027,6 @@ vector <double> Fittino::widthOptimization( vector<double> x, vector<double> vm,
   if( x.size() == 0 ) cout <<"WARNING: x vector has size 0 !"<< endl;
   
   // Information about optimization
-  TFile *tempoFile = new TFile( "tempoFile.root", "RECREATE" );
   int maxStep = 0;
   if( yyNumberOptimizationSteps < 0 ) maxStep = 1000;
   else maxStep = yyNumberOptimizationSteps;
@@ -11047,7 +11064,9 @@ vector <double> Fittino::widthOptimization( vector<double> x, vector<double> vm,
       bool firstChain = true;
       bool successRateOK = false;
       int numChain = 0;
-      
+      int totSteps = 0;
+
+
       // 1 == Prelimimary Markov chain 
       while( firstChain || !successRateOK ){
 	if (yyVerbose){
@@ -11061,6 +11080,7 @@ vector <double> Fittino::widthOptimization( vector<double> x, vector<double> vm,
 	successes = 0;
 	int step = 0;
 	while( step < maxStep ){
+
 	  if (yyVerbose){
 	  cout << yyDashedLine << endl;
 	  cout << "NOTE: Individual optimization, step " << step << endl;
@@ -11083,6 +11103,14 @@ vector <double> Fittino::widthOptimization( vector<double> x, vector<double> vm,
 	  double chi2 = 1.E10;
 	  for (unsigned int i = 0; i < xp.size(); i++) xdummy[i] = xp[i];
 	  fitterFCN(dummyint, &dummyfloat, chi2, xdummy, 0);
+
+	  if( chi2 > 1.E10 ) continue;
+	  totSteps++;
+
+	  varsVal[0] = (Float_t)chi2;
+	  varsVal[1] = totSteps;
+	  for (unsigned int iVar = 2; iVar < 2+yyFittedVec.size(); iVar++) varsVal[iVar] = xp[iVar-2];
+	  widthOptimNtuple->Fill( varsVal );
 	  
 	  // 1.4 == Compare chi2 and the previous chi2
 	  if ( step == 0 ) previousChi2 = chi2 + 1.;
@@ -11102,13 +11130,13 @@ vector <double> Fittino::widthOptimization( vector<double> x, vector<double> vm,
 	  if (yyVerbose){
 	  cout << "IT accpoint = "<< accpoint << endl;
 	  }
-	  // 1.6 == Count the number of successes
+	  // 1.6 == Count the number of successes and increment the step
 	  if( accpoint == 1 && chi2<1.1E10){
 	    successes++;
 	    x[iVariable] = xp[iVariable];
 	    previousChi2 = chi2;
 	  }
-	  step++;
+	  if( chi2 < 1.1E10 ) step++;
 	  
 	  // 1.7 == Modify width
 	  if( step == maxStep )
@@ -11117,6 +11145,13 @@ vector <double> Fittino::widthOptimization( vector<double> x, vector<double> vm,
 	      float _m = maxStep;
 	      float successRate = _s / _m;
 	      numChain++;
+
+	      //    optimizPar[0] = vm[iVariable];
+	      //optimizPar[1] = successRate;
+	      //optimizPar[2] = maxStep;
+	      //optimizPar[3] = numChain;
+	      //	      widthVectorNtuple->Fill( optimizPar );
+
 	      if (yyVerbose){
 	      cout << "step" << step << " --->IT "<< xNames[iVariable] << " Former width = "<<  vm[iVariable] << endl;
 	      }
@@ -11174,6 +11209,9 @@ vector <double> Fittino::widthOptimization( vector<double> x, vector<double> vm,
     // 4 == Global optimization
     bool firstChain = true;
     bool successRateOK = false;
+    int numChain = 0;
+    int totSteps = 0;
+
     while( firstChain || !successRateOK ){
       firstChain = false;
       successes = 0;
@@ -11233,6 +11271,14 @@ vector <double> Fittino::widthOptimization( vector<double> x, vector<double> vm,
 	for (unsigned int i = 0; i < xp.size(); i++) xdummy[i] = xp[i];
 	fitterFCN(dummyint, &dummyfloat, chi2, xdummy, 0);
 	
+	if( chi2 > 1.E10 ) continue;
+	totSteps++;
+
+	varsVal[0] = (Float_t)chi2;
+	varsVal[1] = totSteps;
+	for (unsigned int iVar = 2; iVar < 2+yyFittedVec.size(); iVar++) varsVal[iVar] = xp[iVar-2];
+	widthOptimNtuple->Fill( varsVal );
+
 	// 4.2.3 == Compare chi2 and the previous chi2
 	if ( step == 0 ) previousChi2 = chi2 + 1.;
 	double rho =  TMath::Exp( -chi2/2. + previousChi2/2. );
@@ -11255,7 +11301,7 @@ vector <double> Fittino::widthOptimization( vector<double> x, vector<double> vm,
 	  previousChi2 = chi2;
 	  ntupleAcc->Fill( xp[0], xp[1], xp[2], xp[3], chi2 );
 	}
-	step++;
+	if( chi2 < 1.1E10 ) step++;
 	
 	// 4.3 == End of the chain
 	if( step == maxStep ){
@@ -11264,6 +11310,14 @@ vector <double> Fittino::widthOptimization( vector<double> x, vector<double> vm,
 	  float _s = successes;
 	  float _m = maxStep;
 	  float successRate = _s / _m;
+	  numChain++;
+	  for (unsigned int iVariable = 0; iVariable < x.size(); iVariable++) optimizPar[iVariable] = vm[iVariable];
+	  optimizPar[x.size()] = successRate;
+	  optimizPar[x.size()+1] = maxStep;
+	  optimizPar[x.size()+2] = numChain;
+	  widthVectorNtuple->Fill( optimizPar );
+	  
+
 	  if (yyVerbose){
 	  cout << "step" << step << " --->GT #success = " << successes << " Markov Chain success rate = " <<  successRate << " Former widths : " << endl;
 	  }
@@ -11304,29 +11358,20 @@ vector <double> Fittino::widthOptimization( vector<double> x, vector<double> vm,
 
   }
 
-
-
-  tempoFile->cd();
-  tempoFile->Close();
-  tempoFile->Delete();
-
-
-TFile* OptimizedWidths= new TFile("OptimizedWidths.root","recreate");
+  widthOptimNtupFile->Write();
+  widthOptimNtupFile->Close();
+  
+  /*
+  TFile* OptimizedWidths= new TFile("OptimizedWidths.root","recreate");
   TTree* tree=new TTree("tree", "tree");
-
+  
   for (unsigned int i=0; i<yyFittedVec.size(); i++){ 
     tree->Branch(("width_"+yyFittedVec[i].name).c_str(),&vm[i], (yyFittedVec[i].name+"/D").c_str());	  
   }
   tree->Fill();
   tree->Write();
   OptimizedWidths->Close();
-
-
-
-
-
-
-
+  */
 
   return vm;
 
@@ -11895,6 +11940,7 @@ void Fittino::markovChain ()
       bool firstChi2 = true;
       bool haveAcceptedAtLeastOne = false;
       successes = 0;
+      int part_success = 0;
 
       if (yyVerbose){
       std::cout << "Starting Markov Chain algorithm" << std::endl;
@@ -11931,11 +11977,11 @@ void Fittino::markovChain ()
 	    }
 	 } 
 
-if (yyVerbose){
-	 std::cout << "looking at Markov Chain in step " << niter << " success/fail = " << (double)successes/(double)(niter-successes) << std::endl;
-}
+	 if (yyVerbose){
+	   std::cout << "looking at Markov Chain in step " << niter << " success/fail = " << (double)successes/(double)(niter-successes) << std::endl;
+	 }
 	 for (unsigned int iiiVariable = 0; iiiVariable < x.size(); iiiVariable++) 
-	 {
+	   {
 	   if (yyVerbose){
 	    std::cout 
 	       << iiiVariable << " " 
@@ -12009,10 +12055,10 @@ if (yyVerbose){
 	 //	    }
 	 //	  } 
 
-if (yyVerbose){
-	 std::cout << "calculating rho = " << likelihood << "*" << Qupper << "/" << previousLikelihood << "*" << Qlower<< std::endl;
-}
-
+	 if (yyVerbose){
+	   std::cout << "calculating rho = " << likelihood << "*" << Qupper << "/" << previousLikelihood << "*" << Qlower<< std::endl;
+	 }
+	 
 	 // calculate rho
 	 double rho = 0.;
 	 //	    if (previousLikelihood*Qlower>0.) {
@@ -12048,6 +12094,7 @@ if (yyVerbose){
 	 if (accpoint==1) { 
 	   haveAcceptedAtLeastOne = true;
 	   successes++;
+	   part_success++;
 	 }
 
 	 // ++ntest[iVariable];
@@ -12120,9 +12167,43 @@ if (yyVerbose){
 	    previousLikelihood = likelihood;
 	 }
 
-
-
 	 chainCount++;
+
+	 // Update of the proposal width every 5000 points (default)
+	 // the success rate is calculated for the last 5000 points
+	 // the widths are then rescaled according to the distance from
+	 // the middle acceptance range [0.45;0.55]
+
+	 if( yyUpdateWidths ){
+	   int part = 5000;
+	   float up = 0.55, low = 0.45;
+
+	   if( chainCount%part == 0 ){
+	     float successRate = float(part_success)/float(part);
+	     float unc_successRate = sqrt( successRate*( 1-successRate )/part );
+	     if( yyVerbose ) cout << "NOTE: success rate for the last part points: " << successRate << " +- " << unc_successRate << endl;
+	     if( successRate >= low && successRate <= up ){
+	       if( yyVerbose ) cout << ">>>> same widths kept for the next part points, see you" << endl; 
+	     }
+	     else{
+	     float globalScale = 1.;
+	     if( successRate > up ) globalScale = ( 1 + ( successRate - up )/successRate );
+	     if( successRate < low ){
+	       float tempScale = ( 1 + ( successRate - low )/successRate );
+	       if( tempScale > 0 ) globalScale = tempScale;
+	       if( tempScale < 0 ) globalScale = ( 1 + ( successRate - low )/low );
+	     }
+	     if( yyVerbose ) cout << ">>>> all widths scaled by " << globalScale << endl;
+	     for (unsigned int iVariable = 0; iVariable < x.size(); iVariable++){
+	       vm[iVariable] = vm[iVariable] * globalScale;	
+	       if (yyVerbose) cout << ">>>> new widths for "<< xNames[iVariable] << ": "<<  vm[iVariable] << endl;
+	     }
+	     }
+	     part_success = 0;
+	   }
+	 }
+	 
+	 // End of the chain
 	 if (chainCount > yyMaxMarkovChain)
 	 {
 	    break;

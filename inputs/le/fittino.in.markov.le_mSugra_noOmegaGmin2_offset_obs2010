@@ -154,11 +154,12 @@ fixParameter massTop     171.3        GeV
 fixParameter massTau     1.77684      GeV
 fixParameter SignMu        1
 
-fitParameter M0             500.      GeV +-  156.1   GeV 
-fitParameter M12            600.      GeV +-  280.0   GeV
-fitParameter A0            -600.      GeV +-  334.5   GeV 
-fitParameter TanBeta         40.          +-  3.9825	  
-fitParameter QEWSB         1000.      GeV +-  16.91   GeV  
+fitParameter M0             500.      GeV +-  984   GeV 
+fitParameter M12            600.      GeV +-  906   GeV
+fitParameter A0            -600.      GeV +-  5867   GeV 
+fitParameter TanBeta         40.          +-  29	  
+fitParameter QEWSB         1000.      GeV +-  10   GeV  
+
 
 ################################################################################
 ### Switches                                                                 ###
@@ -189,18 +190,17 @@ GetContours                    off
 
 UseHiggsBounds                 on
 
-
 UseMarkovChains                on
 MarkovChainReadjustWidth       off
 MarkovChainReadjustWidthPeriod 500
 MaxMarkovChain                 50000
-#MarkovInterfaceFilePath        /PUT/YOUR/OWN/PATH/fittino.in.markov.le_mSugra_allObs_central_obs2010
-MarkovInterfaceFilePath         /afs/naf.desy.de/user/p/prudent/fittino/interfaceFile_LEO2010_noOmegaGmin2_mSugra_offset.txt
+MarkovInterfaceFilePath         /afs/naf.desy.de/user/p/prudent/prod2010/interfaceFile_LEO2010_noOmegaGmin2_mSugra_offset.txt
+
 
 MinuitStrategy	               2
 MachinePrecision               1e-8
 
-Verbose                        off
+Verbose                        on
 
 ScanParameters                 off
 

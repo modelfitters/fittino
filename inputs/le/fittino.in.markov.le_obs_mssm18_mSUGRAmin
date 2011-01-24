@@ -10,33 +10,69 @@
 ### Observables                                                              ###
 ################################################################################
 
-LEObs ( DmsDmd_npf     )       0.999826   +- 0.01    +- 0.13              alias 27 # [1]                                   1.00   
-LEObs ( dm_s_npf       )       1.04886    +- 0.01    +- 0.27              alias  2 # [1]				   0.97   
-LEObs ( Kppinn_npf     ) <     4.5        +- 1.0E-10                      alias 25 # [1], added small error 1.0E-10	   4.5    
-LEObs ( Klnu_npf       )       0.999655   +- 0.014                        alias  6 # [1]				   1.008  
-LEObs ( B_smm_npf      ) <     4.7E-8                         +- 0.02E-8  alias  3 # [1]				   4.7E-8 
-LEObs ( B_sXsll_npf    )       0.982556   +- 0.32                         alias  5 # [1]				   0.99   
-LEObs ( B_dll_npf      ) <     2.3E-8                         +- 0.001E-8 alias 26 # [1]				   2.3E-8 
-LEObs ( Btn_npf        )       0.961449   +- 0.40                         alias  4 # [1]				   1.25   
-LEObs ( Bsg_npf        )       0.899922   +- 0.076   +- 0.082 +- 0.050    alias  1 # [1]				   1.117  
-LEObs ( gmin2m_npf     )      3.07752e-09 +- 8.8E-10          +- 2.0E-10  alias  7 # [1]				  30.2E-10
-LEObs ( Omega_npf      )       0.194004   +- 0.0062           +- 0.012    alias 20 # [1]				   0.1099 
-LEObs ( MassW_npf      )      80.3882     +- 0.025            +- 0.010    alias  8 # [1]	80.399 	   
-LEObs ( sin_th_eff_npf )       0.231347   +- 0.0012                       alias  9 # [2]				   0.2324 
-LEObs ( GammaZ_npf     )    2493.65       +- 2.3              +- 1.0      alias 10 # [2]				2495.2    
-LEObs ( R_l_npf        )      20.7873     +- 0.025                        alias 11 # [2]				  20.767  
-LEObs ( R_b_npf        )       0.21585    +- 0.00066                      alias 12 # [2]				   0.21629
-LEObs ( R_c_npf        )       0.172149   +- 0.003                        alias 13 # [2]				   0.1721 
-LEObs ( A_fbb_npf      )       0.104065   +- 0.0016                       alias 14 # [2]				   0.0992 
-LEObs ( A_fbc_npf      )       0.074395   +- 0.0035                       alias 15 # [2]				   0.0707 
-LEObs ( A_b_npf        )       0.935027   +- 0.020                        alias 16 # [2]				   0.923  
-LEObs ( A_c_npf        )       0.668439   +- 0.027                        alias 17 # [2]				   0.670  
-LEObs ( A_l_npf        )       0.148395   +- 0.0021                       alias 18 # [2]				   0.1513 
-LEObs ( Massh0_npf     ) >   113.633                            +- 3.0      alias 19 # [1]				 114.4    
-LEObs ( A_tau_npf      )       0.148395   +- 0.0032                       alias 21 # [2]				   0.1465 
-LEObs ( A_fbl_npf      )       0.0165159  +- 0.00095                      alias 22 # [2]				   0.01714
-LEObs ( sigma_had0_npf )      41.4055     +- 0.037                        alias 23 # [2]				  41.540  
-LEObs ( dm_k_npf       )       1.04837    +- 0.14                         alias 24 # [1]				   1.08   
+
+# Observables calculated for the fitted previous minimum
+LEObs ( DmsDmd_npf     )       0.999825   +- 0.01    +- 0.13              alias 27 # [1]                                   1.00   
+LEObs ( dm_s_npf       )       1.04929   +- 0.01    +- 0.27              alias  2 # [1]                            0.97   
+LEObs ( Kppinn_npf     ) <     4.5        +- 1.0E-10                      alias 25 # [1], added small error 1.0E-10        4.5    
+LEObs ( Klnu_npf       )       0.999655   +- 0.014                        alias  6 # [1]                                   1.008  
+LEObs ( B_smm_npf      ) <     4.7E-8                         +- 0.02E-8  alias  3 # [1]                                   4.7E-8 
+LEObs ( B_sXsll_npf    )       0.982481   +- 0.32                         alias  5 # [1]                                   0.99   
+LEObs ( B_dll_npf      ) <     2.3E-8                         +- 0.001E-8 alias 26 # [1]                                   2.3E-8 
+LEObs ( Btn_npf        )       0.961449   +- 0.40                         alias  4 # [1]                                   1.25   
+LEObs ( Bsg_npf        )       0.896826   +- 0.076   +- 0.082 +- 0.050    alias  1 # [1]                                   1.117  
+LEObs ( gmin2m_npf     )      3.07707e-09 +- 8.8E-10          +- 2.0E-10  alias  7 # [1]                                  30.2E-10
+LEObs ( Omega_npf      )       0.194735   +- 0.0062           +- 0.012    alias 20 # [1]                                   0.1099 
+LEObs ( MassW_npf      )      80.3822     +- 0.025            +- 0.010    alias  8 # [1]        80.399     
+LEObs ( sin_th_eff_npf )       0.231423   +- 0.0012                       alias  9 # [2]                                   0.2324 
+LEObs ( GammaZ_npf     )        2494.95  +- 2.3              +- 1.0      alias 10 # [2]                         2495.2    
+LEObs ( R_l_npf        )      20.7415     +- 0.025                        alias 11 # [2]                                  20.767  
+LEObs ( R_b_npf        )       0.21605    +- 0.00066                      alias 12 # [2]                                   0.21629
+LEObs ( R_c_npf        )       0.172191   +- 0.003                        alias 13 # [2]                                   0.1721 
+LEObs ( A_fbb_npf      )       0.103642   +- 0.0016                       alias 14 # [2]                                   0.0992 
+LEObs ( A_fbc_npf      )       0.0740655   +- 0.0035                       alias 15 # [2]                                   0.0707 
+LEObs ( A_b_npf        )       0.934996   +- 0.020                        alias 16 # [2]                                   0.923  
+LEObs ( A_c_npf        )       0.668176   +- 0.027                        alias 17 # [2]                                   0.670  
+LEObs ( A_l_npf        )       0.147796   +- 0.0021                       alias 18 # [2]                                   0.1513 
+LEObs ( Massh0_npf     ) >   113.633                            +- 3.0      alias 19 # [1]                              114.4    
+LEObs ( A_tau_npf      )       0.147796   +- 0.0032                       alias 21 # [2]                                   0.1465 
+LEObs ( A_fbl_npf      )       0.0163828  +- 0.00095                      alias 22 # [2]                            0.01714
+LEObs ( sigma_had0_npf )      41.4868     +- 0.037                        alias 23 # [2]                                  41.540  
+LEObs ( dm_k_npf       )       1.04878    +- 0.14                         alias 24 # [1]                                   1.08   
+
+
+
+# Previous observables calculated for the minimum,
+# for the minimum found the calculators give now slightly different values
+# which modify the chi2 at the min (~12)
+
+#LEObs ( DmsDmd_npf     )       0.999826   +- 0.01    +- 0.13              alias 27 # [1]                                   1.00   
+#LEObs ( dm_s_npf       )       1.04886    +- 0.01    +- 0.27              alias  2 # [1]				   0.97   
+#LEObs ( Kppinn_npf     ) <     4.5        +- 1.0E-10                      alias 25 # [1], added small error 1.0E-10	   4.5    
+#LEObs ( Klnu_npf       )       0.999655   +- 0.014                        alias  6 # [1]				   1.008  
+#LEObs ( B_smm_npf      ) <     4.7E-8                         +- 0.02E-8  alias  3 # [1]				   4.7E-8 
+#LEObs ( B_sXsll_npf    )       0.982556   +- 0.32                         alias  5 # [1]				   0.99   
+#LEObs ( B_dll_npf      ) <     2.3E-8                         +- 0.001E-8 alias 26 # [1]				   2.3E-8 
+#LEObs ( Btn_npf        )       0.961449   +- 0.40                         alias  4 # [1]				   1.25   
+#LEObs ( Bsg_npf        )       0.899922   +- 0.076   +- 0.082 +- 0.050    alias  1 # [1]				   1.117  
+#LEObs ( gmin2m_npf     )      3.07752e-09 +- 8.8E-10          +- 2.0E-10  alias  7 # [1]				  30.2E-10
+#LEObs ( Omega_npf      )       0.194004   +- 0.0062           +- 0.012    alias 20 # [1]				   0.1099 
+#LEObs ( MassW_npf      )      80.3882     +- 0.025            +- 0.010    alias  8 # [1]	80.399 	   
+#LEObs ( sin_th_eff_npf )       0.231347   +- 0.0012                       alias  9 # [2]				   0.2324 
+#LEObs ( GammaZ_npf     )    2493.65       +- 2.3              +- 1.0      alias 10 # [2]				2495.2    
+#LEObs ( R_l_npf        )      20.7873     +- 0.025                        alias 11 # [2]				  20.767  
+#LEObs ( R_b_npf        )       0.21585    +- 0.00066                      alias 12 # [2]				   0.21629
+#LEObs ( R_c_npf        )       0.172149   +- 0.003                        alias 13 # [2]				   0.1721 
+#LEObs ( A_fbb_npf      )       0.104065   +- 0.0016                       alias 14 # [2]				   0.0992 
+#LEObs ( A_fbc_npf      )       0.074395   +- 0.0035                       alias 15 # [2]				   0.0707 
+#LEObs ( A_b_npf        )       0.935027   +- 0.020                        alias 16 # [2]				   0.923  
+#LEObs ( A_c_npf        )       0.668439   +- 0.027                        alias 17 # [2]				   0.670  
+#LEObs ( A_l_npf        )       0.148395   +- 0.0021                       alias 18 # [2]				   0.1513 
+#LEObs ( Massh0_npf     ) >   113.633                            +- 3.0      alias 19 # [1]				 114.4    
+#LEObs ( A_tau_npf      )       0.148395   +- 0.0032                       alias 21 # [2]				   0.1465 
+#LEObs ( A_fbl_npf      )       0.0165159  +- 0.00095                      alias 22 # [2]				   0.01714
+#LEObs ( sigma_had0_npf )      41.4055     +- 0.037                        alias 23 # [2]				  41.540  
+#LEObs ( dm_k_npf       )       1.04837    +- 0.14                         alias 24 # [1]				   1.08   
 
 
 ### SM observables
@@ -201,25 +237,26 @@ fixParameter alphas          0.1176         GeV
 fixParameter massZ          91.1875         GeV
 fixParameter massBottom      4.20           GeV
 fixParameter massTau         1.77684        GeV
-fitParameter MSelectronL     1.94317068E+02 +- 80.02277	 # +- 0.54    
-fitParameter MSelectronR     1.35763570E+02 +- 2.31153	 # +- 0.32    
-fitParameter MStauL          1.93521964E+02 +- 83.0571	 # +- 3.47   
-fitParameter MStauR          1.33435645E+02 +- 95.0496	 # +- 20.035  
-fitParameter MSupL           5.27578743E+02 +- 16.6894	 # +- 0.35    
-fitParameter MSupR           5.09146647E+02 +- 145.395	 # +- 1.03   
-fitParameter MSbottomR       5.04016936E+02 +- 55.2533	 # +- 2.09   
-fitParameter MStopL          4.81693885E+02 +- 31.0939	 # +- 2.09   
-fitParameter MStopR          4.09126974E+02 +- 59.7354	 # +- 13.17  
-fitParameter TanBeta        10              +- 4.04107	 # +- 0.29    
-fitParameter Mu              3.55049634E+02 +- 12.4801	 # +- 0.44    
-fitParameter Xtau        -3799.8856134      +- 1919.11	 # +- 256.81 
-fitParameter Xtop         -526.62940346     +- 96.8006	 # +- 19.25  
-fitParameter Xbottom     -4314.3389594      +- 1447.59	 # +- 393.77 
-fitParameter M1              1.03153128E+02 +- 1.73619	 # +- 0.223   
-fitParameter M2              1.92951297E+02 +- 1.13673	 # +- 0.232   
-fitParameter M3              5.68875737E+02 +- 24.3222	 # +- 1.02   
-fitParameter massA0        359.62538286     +- 200.9253   # +- 52.98  
-fitParameter massTop       173.1            +- 1.3  
+fitParameter MSelectronL     1.94317068E+02 +- 4.60	 # +- 0.54    
+fitParameter MSelectronR     1.35763570E+02 +- 0.72	 # +- 0.32    
+fitParameter MStauL          1.93521964E+02 +- 1.12	 # +- 3.47   
+fitParameter MStauR          1.33435645E+02 +- 1.12	 # +- 20.035  
+fitParameter MSupL           5.27578743E+02 +- 10.80	 # +- 0.35    
+fitParameter MSupR           5.09146647E+02 +- 38.39	 # +- 1.03   
+fitParameter MSbottomR       5.04016936E+02 +- 81.97	 # +- 2.09   
+fitParameter MStopL          4.81693885E+02 +- 22.76	 # +- 2.09   
+fitParameter MStopR          4.09126974E+02 +- 6.05	 # +- 13.17  
+fitParameter TanBeta        10              +- 0.18	 # +- 0.29    
+fitParameter Mu              3.55049634E+02 +- 7.64	 # +- 0.44    
+fitParameter Xtau        -3799.8856134      +- 122.59	 # +- 256.81 
+fitParameter Xtop         -526.62940346     +- 9.58	 # +- 19.25  
+fitParameter Xbottom     -4314.3389594      +- 7.77	 # +- 393.77 
+fitParameter M1              1.03153128E+02 +- 1.12	 # +- 0.223   
+fitParameter M2              1.92951297E+02 +- 24.89	 # +- 0.232   
+fitParameter M3              5.68875737E+02 +- 66.23	 # +- 1.02   
+fitParameter massA0        359.62538286     +- 42.50   # +- 52.98  
+fitParameter massTop       173.1            +- 0.05  
+
 
 #         MSelectronL&     194.31 &  194.315 & $\pm$ & 5.4     & 0.096 \\
 #         MSelectronR&     135.76 &  135.758 & $\pm$ & 3.2     & 0.117 \\
@@ -235,7 +272,7 @@ fitParameter massTop       173.1            +- 1.3
 #         Xtau       & -3799.88   & -3795.12 & $\pm$ & 2568.1  & 61.8  \\
 #         Xtop       &  -526.62   & -526.801 & $\pm$ & 192.5   & 6.98  \\
 #         Xbottom    & -4314.33   & -4252.11 & $\pm$ & 3937.7  & 783.3  \\
-#         M1         &     103.15 &  103.154 & $\pm$ & 2.23    & 0.058\\
+#  BB       M1         &     103.15 &  103.154 & $\pm$ & 2.23    & 0.058\\
 #         M2         &     192.95 &  192.951 & $\pm$ & 2.32    & 0.13 \\
 #         M3         &     568.87 &  568.664 & $\pm$ & 10.2    & 2.21  \\
 #         massA0     &   359.63   &  360.069 & $\pm$ & 529.8   & 2.5  \\
@@ -288,20 +325,19 @@ GetTempFromFirstChiSqr         off
 
 ToyFitShakeFittedVecBeforeStart off
 
+
+UseHiggsBounds                 on
+
+
 UseMarkovChains                on
 MarkovChainReadjustWidth       off
 MarkovChainReadjustWidthPeriod 500
-MaxMarkovChain                 60000
-MarkovInterfaceFilePath        /nfs/flc/lc3/pool/bechtle/programs/start_fittino/interfaceFiles/markov.le_obs_mssm18_mSUGRAmin_091211
+MaxMarkovChain                 50000
+MarkovInterfaceFilePath        /afs/naf.desy.de/user/p/prudent/prod2010/markov.le_obs_mssm18_mSUGRAmin
 
 # Must be on (default=off)
 WidthOptimization               off
-
-# Steps for individual/global optimization (default=1000)
 NumberOptimizationSteps         250
-
-# Upper and lower values of the acceptance range for the optimization
-# (defaults are 0.48, 0.52)
 AcceptanceRangeUpper            0.6
 AcceptanceRangeLower            0.4
 
@@ -310,9 +346,9 @@ MaxCalculatorTime              10
 MinuitStrategy	               2
 MachinePrecision               1e-6
 
-Verbose                        off
+Verbose                        on
 
 ScanParameters                 off
 
-PerformFit                     on
+PerformFit                     off
 #RandomGeneratorSeed            -1
