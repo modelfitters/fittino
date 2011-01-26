@@ -9024,7 +9024,11 @@ int   ReadLesHouches()
                  epmasses[0] = yyMass[yyMeasuredVec[i].daughters[0]];
                  epmasses[1] = yyMass[yyMeasuredVec[i].daughters[2]];
                  epmasses[2] = yyMass[yyMeasuredVec[i].daughters[1]];
-               } else if (yyMeasuredVec[i].id == 102 || 
+	       } else if (yyMeasuredVec[i].id == 101) {
+		 epmasses[0] = yyMass[yyMeasuredVec[i].daughters[0]];
+		 epmasses[2] = yyMass[yyMeasuredVec[i].daughters[2]];
+		 epmasses[3] = yyMass[yyMeasuredVec[i].daughters[1]];
+	       } else if (yyMeasuredVec[i].id == 102 || 
 			  yyMeasuredVec[i].id == 106) {
                  epmasses[0] = yyMass[yyMeasuredVec[i].daughters[0]];
                  epmasses[1] = yyMass[yyMeasuredVec[i].daughters[2]];
