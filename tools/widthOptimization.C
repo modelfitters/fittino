@@ -16,7 +16,10 @@
 
 // This macro handles so far only the individual optimization
 // (more to come)
-
+//
+// 18th February 2011
+// Xavier Prudent
+// prudent[at]physik.tu-dresden.de
 
 
 void monitor( TString path = "", TString var = "" ){
@@ -64,6 +67,10 @@ void monitor( TString path = "", TString var = "" ){
   histo1->SetTitle( "Proposal width for each chain" );
   histo1->SetYTitle("Proposal width");
   histo1->SetXTitle("Chain number");
+
+  cout << " >>>> Evolution of proposal widths..." << endl;
+  tree2->Scan("numChain:width");
+  cout << " >>>> Pick the last value as optimised" << endl;
 
 
   
