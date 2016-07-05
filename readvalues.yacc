@@ -1999,7 +1999,7 @@ input:
 		      tmpValue.error = $6;
                       tmpValue.nofit = false;
 		      tmpValue.bound = true;
-		      if (strcmp($4, ">")) {
+		      if (!strcmp($4, ">")) {
 			  tmpValue.value = $5;
 			  tmpValue.bound_low = $5;
 			  tmpValue.bound_up = 1.E+6;
