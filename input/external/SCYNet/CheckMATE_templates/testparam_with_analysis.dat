@@ -1,0 +1,13 @@
+# This is a minimal working example
+[Parameters]
+Name: My_New_Run
+Analyses: 13TeV
+OutputDirectory: .
+OutputExists: overwrite
+SkipParamCheck: True
+
+
+[myprocess]
+XSect: 4 FB
+Events: /lustre/user/bruegge/fittinorun/testfile.hep
+

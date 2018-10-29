@@ -1,0 +1,17 @@
+import model mssm-full
+define jj = go ul ur dl dr cl cr sl sr b1 b2 t1 t2 ul~ ur~ dl~ dr~ cl~ cr~ sl~ sr~ b1~ b2~ t1~ t2~
+generate p p > b1 b1~ @0
+add process p p > b1 b1~ j @1 $jj
+
+output cMSSM_b1b1~
+launch
+
+set nevents [events]
+set iseed 1
+set ebeam1 6500.0
+set ebeam2 6500.0
+set pdlabel nn23lo1
+set misset 0
+
+SPheno.spc
+

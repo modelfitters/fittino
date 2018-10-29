@@ -1,0 +1,64 @@
+[Parameters]
+Name: checkmate_cMSSM
+Analyses: 13TeV
+SLHAFile: SPheno.spc
+OutputDirectory: .
+SkipParamCheck: True
+OutputExists: overwrite
+FullCLs: True
+likelihood: True
+ProcessResultFileColumns: analysis,sr,totalmcevents,totalnormevents,totalsumofweights,totalsumofweights2,signalsumofweights,signalsumofweights2,signalnormevents,signal_err_stat,signal_err_sys,signal_err_tot
+TotalResultFileColumns: analysis,sr,totalmcevents,totalnormevents,totalsumofweights,totalsumofweights2,signalsumofweights,signalsumofweights2,signalnormevents,signal_err_stat,signal_err_sys,signal_err_tot,obs,bkg,bkgerr,signaleff,eff_err_stat,eff_err_sys,eff_err_tot,s95obs,s95exp,robs,robscons,robsconssysonly,rexp,rexpcons,rexpconssysonly, clsobs, clsobs_err, clsexp, clsexp_err, likelihood
+
+
+
+[ew_ew]
+XSect:[XSewew] PB
+XSectErr:[XSect_ewew_err] PB 
+Events: cMSSM_ewew/Events/run_01/unweighted_events.lhe
+
+
+[ew_st]
+XSect:[XSewst] PB
+XSectErr:[XSect_ewst_err] PB 
+Events: cMSSM_ewst/Events/run_01/unweighted_events.lhe
+
+[go_go]
+XSect:[XSgogo] PB
+XSectErr:[XSect_gogo_err] PB 
+Events: cMSSM_gogo/Events/run_01/unweighted_events.lhe
+
+[sb1_asb1]
+XSect:[XSect_sb1asb1] PB
+XSectErr:[XSect_sb1asb1_err] PB 
+Events: cMSSM_b1b1~/Events/run_01/unweighted_events.lhe
+
+[sq_go]
+XSect:[XSect_gosq] PB
+XSectErr:[XSect_gosq_err] PB 
+Events: cMSSM_gosq/Events/run_01/unweighted_events.lhe
+
+[sb2_asb2]
+XSect:[XSect_sb2asb2] PB
+XSectErr:[XSect_sb2asb2_err] PB 
+Events: cMSSM_b2b2~/Events/run_01/unweighted_events.lhe
+
+[st1_ast1]
+XSect:[XSect_st1ast1] PB
+XSectErr:[XSect_st1ast1_err] PB 
+Events: cMSSM_t1t1~/Events/run_01/unweighted_events.lhe
+
+[st2_ast2]
+XSect:[XSect_st2ast2] PB
+XSectErr:[XSect_st2ast2_err] PB 
+Events: cMSSM_t2t2~/Events/run_01/unweighted_events.lhe
+
+[sq_sq]
+XSect:[XSect_sqsq] PB
+XSectErr:[XSect_sqsq_err] PB 
+Events: cMSSM_sqsq/Events/run_01/unweighted_events.lhe
+
+[sq_asq]
+XSect:[XSect_sqasq] PB
+XSectErr:[XSect_sqasq_err] PB 
+Events: cMSSM_sqasq/Events/run_01/unweighted_events.lhe

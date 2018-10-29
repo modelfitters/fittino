@@ -1,0 +1,769 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<?xml-stylesheet type="text/xsl" href="style/InputFile.xsl"?>
+
+<InputFile>
+
+    <VerbosityLevel>INFO</VerbosityLevel>
+
+    <Model>
+
+        <ModelBase>
+
+            <Name>MSSM</Name>
+
+             <ModelParameter>
+                <Name>Minput</Name>
+                <Value>1500</Value>
+                <Error>1</Error>
+                <LowerBound>1500</LowerBound>
+                <UpperBound>1500</UpperBound>
+                <Fixed>true</Fixed>
+            </ModelParameter>
+
+            <ModelParameter>
+                <Name>M1</Name>
+                <Value>-1549.88851517</Value>
+                <Error>1</Error>
+                <LowerBound>-4000</LowerBound>
+                <UpperBound>4000</UpperBound>
+                <Fixed>false</Fixed>
+            </ModelParameter>
+
+            <ModelParameter>
+                <Name>M2</Name>
+                <Value>3581.22581508</Value>
+                <Error>1</Error>
+                <LowerBound>100</LowerBound>
+                <UpperBound>4000</UpperBound>
+                <Fixed>false</Fixed>
+            </ModelParameter>
+
+            <ModelParameter>
+                <Name>M3</Name>
+                <Value>3024.28680319</Value>
+                <Error>1</Error>
+                <LowerBound>-4000</LowerBound>
+                <UpperBound>4000</UpperBound>
+                <Fixed>false</Fixed>
+            </ModelParameter>
+
+            <ModelParameter>
+                <Name>MQ1</Name>
+                <Value>2015.49389822</Value>
+                <Error>1</Error>
+                <LowerBound>300</LowerBound>
+                <UpperBound>5000</UpperBound>
+                <Fixed>false</Fixed>
+            </ModelParameter>
+
+            <ModelParameter>
+                <Name>MQ3</Name>
+                <Value>4247.25654302</Value>
+                <Error>1</Error>
+                <LowerBound>100</LowerBound>
+                <UpperBound>5000</UpperBound>
+                <Fixed>false</Fixed>
+            </ModelParameter>
+
+            <ModelParameter>
+                <Name>ML1</Name>
+                <Value>2699.87606377</Value>
+                <Error>1</Error>
+                <LowerBound>100</LowerBound>
+                <UpperBound>3000</UpperBound>
+                <Fixed>false</Fixed>
+            </ModelParameter>
+
+            <ModelParameter>
+                <Name>ML3</Name>
+                <Value>2742.96369003</Value>
+                <Error>1</Error>
+                <LowerBound>100</LowerBound>
+                <UpperBound>4000</UpperBound>
+                <Fixed>false</Fixed>
+            </ModelParameter>
+
+            <ModelParameter>
+                <Name>MA0</Name>
+                <Value>1804.55978856</Value>
+                <Error>1</Error>
+                <LowerBound>0</LowerBound>
+                <UpperBound>4000</UpperBound>
+                <Fixed>false</Fixed>
+            </ModelParameter>
+
+            <ModelParameter>
+                <Name>A</Name>
+                <Value>2250.4074101</Value>
+                <Error>1</Error>
+                <LowerBound>-5000</LowerBound>
+                <UpperBound>5000</UpperBound>
+                <Fixed>false</Fixed>
+            </ModelParameter>
+
+            <ModelParameter>
+                <Name>Mu</Name>
+                <Value>-1576.42703453</Value>
+                <Error>1</Error>
+                <LowerBound>-5000</LowerBound>
+                <UpperBound>5000</UpperBound>
+                <Fixed>false</Fixed>
+            </ModelParameter>
+
+            <ModelParameter>
+                <Name>TanBeta</Name>
+                <Value>20.8516688812</Value>
+                <Error>1</Error>
+                <LowerBound>1</LowerBound>
+                <UpperBound>60</UpperBound>
+                <Fixed>false</Fixed>
+            </ModelParameter>
+
+         <ModelParameter>
+                <Name>Mt</Name>
+                <Value>173.3</Value>
+                <Error>1</Error>
+                <LowerBound>130</LowerBound>
+                <UpperBound>215</UpperBound>
+                <Fixed>true</Fixed>
+            </ModelParameter>
+
+
+
+            <Observables>
+            </Observables>
+            <CovarianceMatrices>
+            </CovarianceMatrices>
+
+            <Calculators>
+
+                <SPhenoCalculator>
+
+                    <Name>SPhenoCalculator</Name>
+
+                    <Executable>/lustre/user/bruegge/buildfittino/Source/SPheno-4.0.3/bin/SPheno</Executable>
+                    <InputFile>
+                        <Template>/lustre/user/bruegge/buildfittino/Install/Fittino_Python2/share/fittino/input/pMSSM11.slha</Template>
+                        <Name>pMSSM11.slha</Name>
+                        <Quantity>
+                            <Name>[Minput]</Name>
+                            <Value>[Minput]</Value>
+                        </Quantity>
+                        <Quantity>
+                            <Name>[M1]</Name>
+                            <Value>[M1]</Value>
+                        </Quantity>
+                        <Quantity>
+                            <Name>[M2]</Name>
+                            <Value>[M2]</Value>
+                        </Quantity>
+                        <Quantity>
+                            <Name>[M3]</Name>
+                            <Value>[M3]</Value>
+                        </Quantity>
+                        <Quantity>
+                            <Name>[A]</Name>
+                            <Value>[A]</Value>
+                        </Quantity>
+                        <Quantity>
+                            <Name>[Mu]</Name>
+                            <Value>[Mu]</Value>
+                        </Quantity>
+                        <Quantity>
+                            <Name>[MA0]</Name>
+                            <Value>[MA0]</Value>
+                        </Quantity>
+                        <Quantity>
+                            <Name>[ML1]</Name>
+                            <Value>[ML1]</Value>
+                        </Quantity>
+                        <Quantity>
+                            <Name>[ML3]</Name>
+                            <Value>[ML3]</Value>
+                        </Quantity>
+                        <Quantity>
+                            <Name>[MQ1]</Name>
+                            <Value>[MQ1]</Value>
+                        </Quantity>
+                        <Quantity>
+                            <Name>[MQ3]</Name>
+                            <Value>[MQ3]</Value>
+                        </Quantity>
+                        <Quantity>
+                            <Name>[TanBeta]</Name>
+                            <Value>[TanBeta]</Value>
+                        </Quantity>
+                    </InputFile>
+                    <OutputFile>SPheno.spc</OutputFile>
+                </SPhenoCalculator>
+
+		 <LHCNeuralNet2Calculator>
+                    <scynet_script>SCYNet</scynet_script>
+                    <scynet_out>SCYNet.out</scynet_out>
+                    <M1>[M1]</M1>
+                    <M2>[M2]</M2>
+                    <M3>[M3]</M3>
+                    <MQ1>[MQ1]</MQ1>
+                    <MQ3>[MQ3]</MQ3>
+                    <ML1>[ML1]</ML1>
+                    <ML3>[ML3]</ML3>
+                    <MA0>[MA0]</MA0>
+                    <TanBeta>[TanBeta]</TanBeta>
+                    <Mu>[Mu]</Mu>
+                    <A>[A]</A>
+                </LHCNeuralNet2Calculator>
+
+               <FormulaPropCalculator>
+                  <NonZerosRequired>true</NonZerosRequired>
+                  <Quantity>
+                     <Name>Chi2_SCYNet_lower</Name>
+                     <Value>[SCYNet_Chi2] >= 2.0 </Value>
+                  </Quantity>
+                </FormulaPropCalculator>
+
+                <FormulaPropCalculator>
+                  <NonZerosRequired>true</NonZerosRequired>
+                  <Quantity>
+                     <Name>Chi2_SCYNet_upper</Name>
+                     <Value>[SCYNet_Chi2] &lt;= 10.0 </Value>
+                  </Quantity>
+                </FormulaPropCalculator>    
+
+                <FormulaCalculator>
+                  <NonZerosRequired>true</NonZerosRequired>
+                  <Quantity>
+                     <Name>Decay_Width_Chargino</Name>
+                     <Value>[SPheno_GammaTotal_~chi1p] >= 10e-13 </Value>
+                  </Quantity>
+                </FormulaCalculator>    
+
+
+		<MinimumCalculator>
+		    <Name>MassOfLSP</Name>
+		    <Regex>SPheno.*Mass_~.*</Regex>
+
+		</MinimumCalculator>
+
+
+		<FormulaCalculator>
+		  <NonZerosRequired>true</NonZerosRequired>
+		  <Quantity>
+		     <Name>NeutralinoLSP</Name>
+		     <Value>[SPheno_Mass_~chi10] == [MassOfLSP_Value]</Value>
+		  </Quantity>
+		</FormulaCalculator>  
+
+
+		<Chi2Calculator>
+		    <Name>Preselection</Name>
+			<Observable> 
+			  <Name>Mass_h0</Name>
+			  <Prediction>[SPheno_Mass_h0]</Prediction>
+			  <Measurement>110.</Measurement>
+			  <Type>LowerLimit</Type>
+			</Observable>
+			<Observable> 
+			  <Name>Mass_H0</Name>
+			  <Prediction>[SPheno_Mass_H0]</Prediction>
+			  <Measurement>110.</Measurement>
+			  <Type>LowerLimit</Type>
+			</Observable>
+			<Observable> 
+			  <Name>Mass_~chi1p</Name>
+			  <Prediction>[SPheno_Mass_~chi1p]</Prediction>
+			  <Measurement>103.5</Measurement>
+			  <Type>LowerLimit</Type>
+			</Observable>
+			<Observable> 
+			  <Name>Mass_W</Name>
+			  <Prediction>[SPheno_Mass_Wp]</Prediction>
+			  <Measurement>80.385</Measurement>
+			  <Uncertainty>
+				<Value>5*0.015</Value>
+                          </Uncertainty>
+			  <Uncertainty>
+                                 <Value>5*[Prediction]*0.1/100.</Value>
+                          </Uncertainty>
+			  <Type>Box</Type>
+			</Observable>
+			<Observable> 
+			  <Name>BR_b_s_gamma</Name>
+			  <Prediction>[SPheno_BR_b_s_gamma]</Prediction>
+			  <Measurement>3.43e-4</Measurement>
+			  <Uncertainty>
+				<Value>5*0.21e-4</Value>
+			  </Uncertainty>
+			  <Uncertainty>
+				<Value>5*0.07e-4</Value>
+			  </Uncertainty>
+			  <Uncertainty>
+				<Value>5*[Prediction]*14./100.</Value>
+                      	  </Uncertainty>
+			  <Type>Box</Type>
+			</Observable>
+			<Observable> 
+			  <Name>BR_Bs_mu_mu</Name>
+			  <Prediction>[SPheno_BR_Bs_mu_mu]</Prediction>
+			  <Measurement>2.9e-9</Measurement>
+			  <Uncertainty>
+				<Value>0.7e-9</Value>
+			  </Uncertainty>
+			  <Uncertainty>
+				<Value>5*[Prediction]*26./100.</Value>
+                      	  </Uncertainty>
+			  <Type>Box</Type>
+			</Observable>
+			<Observable> 
+			  <Name>BR_Bu_tau_nu</Name>
+			  <Prediction>[SPheno_BR_Bu_tau_nu]</Prediction>
+			  <Measurement>1.05e-4</Measurement>
+			  <Uncertainty>
+		             <Value>5*0.25e-4</Value>
+			  </Uncertainty>
+			  <Uncertainty>
+			     <Value>5*[Prediction]*20./100.</Value>
+			  </Uncertainty>
+			  <Type>Box</Type>
+			</Observable>
+			<Observable> 
+			  <Name>Abs_Delta_Mass_Bs</Name>
+			  <Prediction>[SPheno_Abs_Delta_Mass_Bs]</Prediction>
+			  <Measurement>17.719</Measurement>
+			  <Uncertainty>
+				<Value>5*0.036</Value>
+			  </Uncertainty>
+			  <Uncertainty>
+				<Value>5*0.023</Value>
+			  </Uncertainty>
+			  <Uncertainty>
+				<Value>5*[Prediction]*24./100.</Value>
+			  </Uncertainty>
+			  <Type>Box</Type>
+			</Observable> 
+		</Chi2Calculator>
+                <FormulaCalculator>
+           		<NonZerosRequired>true</NonZerosRequired>
+ 			<Quantity>
+			 	<Name>PreselectionPassed</Name>
+			 	<Value>[Preselection_Chi2]==0.</Value>
+			</Quantity> 
+
+		</FormulaCalculator> 
+
+		<ProspinoCalculator>
+                        <Executable>./prospino2</Executable>
+                        <ProOutput>./prospino2/prospino.dat</ProOutput>
+                        <SLHAFile>SPheno.spc</SLHAFile>
+                        <ProOldSLHAFile>./prospino2/prospino.in.les_houches</ProOldSLHAFile>
+                </ProspinoCalculator>
+		
+
+		
+
+
+		<EventNumber3Calculator>
+                    <Name>sqsq</Name>
+                    <Executable>/lustre/user/bruegge/fittinoprotected/tools/MG5_aMC_v2_6_0/bin/mg5_aMC</Executable>
+                    <XS>[Pro_XSNLO_1m_ss]</XS>
+                </EventNumber3Calculator>
+
+
+		<EventNumber3Calculator>
+                    <Name>sqasq</Name>
+                    <Executable>/lustre/user/bruegge/fittinoprotected/tools/MG5_aMC_v2_6_0/bin/mg5_aMC</Executable>
+                    <XS>[Pro_XSNLO_1m_sb]</XS>
+                </EventNumber3Calculator>
+
+
+		<EventNumber3Calculator>
+                    <Name>gogo</Name>
+                    <Executable>/lustre/user/bruegge/fittinoprotected/tools/MG5_aMC_v2_6_0/bin/mg5_aMC</Executable>
+                    <XS>[Pro_XSNLO_1m_gg]</XS>
+                </EventNumber3Calculator>
+
+		<EventNumber3Calculator>
+                    <Name>gosq</Name>
+                    <Executable>/lustre/user/bruegge/fittinoprotected/tools/MG5_aMC_v2_6_0/bin/mg5_aMC</Executable>
+                    <XS>[Pro_XSNLO_1m_sg]</XS>
+                </EventNumber3Calculator>
+
+		<EventNumber3Calculator>
+                    <Name>b1b1~</Name>
+                    <Executable>/lustre/user/bruegge/fittinoprotected/tools/MG5_aMC_v2_6_0/bin/mg5_aMC</Executable>
+                    <XS>[Pro_XSNLO_1m_bb1]</XS>
+                </EventNumber3Calculator>
+
+
+		<EventNumber3Calculator>
+                    <Name>b2b2~</Name>
+                    <Executable>/lustre/user/bruegge/fittinoprotected/tools/MG5_aMC_v2_6_0/bin/mg5_aMC</Executable>
+                    <XS>[Pro_XSNLO_1m_bb2]</XS>
+                </EventNumber3Calculator>
+
+		<EventNumber3Calculator>
+                    <Name>t1t1~</Name>
+                    <Executable>/lustre/user/bruegge/fittinoprotected/tools/MG5_aMC_v2_6_0/bin/mg5_aMC</Executable>
+                    <XS>[Pro_XSNLO_1m_tb1]</XS>
+                </EventNumber3Calculator>
+		<EventNumber3Calculator>
+                    <Name>t2t2~</Name>
+                    <Executable>/lustre/user/bruegge/fittinoprotected/tools/MG5_aMC_v2_6_0/bin/mg5_aMC</Executable>
+                    <XS>[Pro_XSNLO_1m_tb2]</XS>
+                </EventNumber3Calculator>
+
+
+
+		<MadGraph5EWCalculator>
+                    <Name>ewew</Name>
+                    <Executable>/lustre/user/bruegge/fittinoprotected/tools/MG5_aMC_v2_6_0/bin/mg5_aMC</Executable>
+                        <Decay_Width>[SPheno_GammaTotal_~chi1p]</Decay_Width>
+                        <MGinputFile>MGewew_cMSSM_13TeV_1.txt</MGinputFile>
+                        <XSFile>cMSSM_ewew/crossx.html</XSFile>
+                        <BannerFile>cMSSM_ewew/Events/run_01/run_01_tag_1_banner.txt</BannerFile>
+                        <EventFile>cMSSM_ewew/Events/run_01/unweighted_events.lhe.gz</EventFile>
+                        <SLHAFile>SPheno.spc</SLHAFile>
+           		<InputFile>
+                           <Template>MG_template_ewew.txt</Template>
+                           <Name> MGewew_cMSSM_13TeV_1.txt </Name>
+                           <Quantity>
+                              <Name>[events]</Name>
+                              <Value> 10000</Value>
+                           </Quantity>
+
+                         </InputFile>
+
+
+               </MadGraph5EWCalculator>
+                
+                <MadGraph5EWCalculator>
+                    <Name>ewst</Name>
+                    <Executable>/lustre/user/bruegge/fittinoprotected/tools/MG5_aMC_v2_6_0/bin/mg5_aMC</Executable>
+                        <Decay_Width>[SPheno_GammaTotal_~chi1p]</Decay_Width>
+                        <XSFile>cMSSM_ewst/crossx.html</XSFile>
+                        <MGinputFile>MGewst_cMSSM_13TeV_1.txt</MGinputFile>
+                        <BannerFile>cMSSM_ewst/Events/run_01/run_01_tag_1_banner.txt</BannerFile>
+                        <EventFile>cMSSM_ewst/Events/run_01/unweighted_events.lhe.gz</EventFile>
+                        <SLHAFile>SPheno.spc</SLHAFile>
+           		<InputFile>
+                           <Template>MG_template_ewst.txt</Template>
+                           <Name> MGewst_cMSSM_13TeV_1.txt </Name>
+                           <Quantity>
+                              <Name>[events]</Name>
+                              <Value>10000</Value>
+                           </Quantity>
+
+                         </InputFile>
+                </MadGraph5EWCalculator>
+
+
+
+
+	        <MadGraph5Calculator>
+		    <Name>gogo</Name>
+                    <Executable>/lustre/user/bruegge/fittinoprotected/tools/MG5_aMC_v2_6_0/bin/mg5_aMC</Executable>
+                        <Decay_Width>[SPheno_GammaTotal_~chi1p]</Decay_Width>
+	        	<MGinputFile>MGgogo_cMSSM_13TeV_jet_1.txt</MGinputFile>	       
+	        	<BannerFile>cMSSM_gogo/Events/run_01/run_01_tag_1_banner.txt</BannerFile>
+			<EventFile>cMSSM_gogo/Events/run_01/unweighted_events.lhe.gz</EventFile>	       
+			<SLHAFile>SPheno.spc</SLHAFile>	       
+           		<InputFile>
+                           <Template>MG_template_gogo.txt</Template>
+                           <Name> MGgogo_cMSSM_13TeV_jet_1.txt </Name>
+                           <Quantity>
+                              <Name>[events]</Name>
+                              <Value>[gogo_N]</Value>
+                           </Quantity>
+
+                         </InputFile>
+                </MadGraph5Calculator>    
+
+                 <MadGraph5Calculator>
+		    <Name>b1b1</Name>
+                    <Executable>/lustre/user/bruegge/fittinoprotected/tools/MG5_aMC_v2_6_0/bin/mg5_aMC</Executable>
+	        	<MGinputFile>MGb1b1~_cMSSM_13TeV_jet_1.txt</MGinputFile>	       
+                        <Decay_Width>[SPheno_GammaTotal_~chi1p]</Decay_Width>
+	        	<BannerFile>cMSSM_b1b1~/Events/run_01/run_01_tag_1_banner.txt</BannerFile>	       
+			<SLHAFile>SPheno.spc</SLHAFile>	       
+			<EventFile>cMSSM_b1b1~/Events/run_01/unweighted_events.lhe.gz</EventFile>	       
+           		<InputFile>
+                           <Template>MG_template_b1b1~.txt</Template>
+                           <Name> MGb1b1~_cMSSM_13TeV_jet_1.txt </Name>
+                           <Quantity>
+                              <Name>[events]</Name>
+                              <Value>[b1b1~_N]</Value>
+                           </Quantity>
+                         </InputFile>
+                </MadGraph5Calculator>  
+
+                <MadGraph5Calculator>
+			
+		    <Name>b2b2</Name>
+                    <Executable>/lustre/user/bruegge/fittinoprotected/tools/MG5_aMC_v2_6_0/bin/mg5_aMC</Executable>
+	        	<MGinputFile>MGb2b2~_cMSSM_13TeV_jet_1.txt</MGinputFile>	       
+                        <Decay_Width>[SPheno_GammaTotal_~chi1p]</Decay_Width>
+	        	<BannerFile>cMSSM_b2b2~/Events/run_01/run_01_tag_1_banner.txt</BannerFile>	       
+			<SLHAFile>SPheno.spc</SLHAFile>	       
+			<EventFile>cMSSM_b2b2~/Events/run_01/unweighted_events.lhe.gz</EventFile>	       
+           		<InputFile>
+                           <Template>MG_template_b2b2~.txt</Template>
+                           <Name> MGb2b2~_cMSSM_13TeV_jet_1.txt </Name>
+                           <Quantity>
+                              <Name>[events]</Name>
+                              <Value>[b2b2~_N]</Value>
+                           </Quantity>
+                         </InputFile>
+                </MadGraph5Calculator>
+                <MadGraph5Calculator>
+
+		    <Name>t1t1</Name>
+                    <Executable>/lustre/user/bruegge/fittinoprotected/tools/MG5_aMC_v2_6_0/bin/mg5_aMC</Executable>
+	        	<MGinputFile>MGt1t1~_cMSSM_13TeV_jet_1.txt</MGinputFile>	       
+                        <Decay_Width>[SPheno_GammaTotal_~chi1p]</Decay_Width>
+	        	<BannerFile>cMSSM_t1t1~/Events/run_01/run_01_tag_1_banner.txt</BannerFile>	       
+			<SLHAFile>SPheno.spc</SLHAFile>	       
+			<EventFile>cMSSM_t1t1~/Events/run_01/unweighted_events.lhe.gz</EventFile>	       
+           		<InputFile>
+                           <Template>MG_template_t1t1~.txt</Template>
+                           <Name> MGt1t1~_cMSSM_13TeV_jet_1.txt </Name>
+                           <Quantity>
+                              <Name>[events]</Name>
+                              <Value>[t1t1~_N]</Value>
+                           </Quantity>
+                         </InputFile>
+                </MadGraph5Calculator>
+                <MadGraph5Calculator>
+			
+		    <Name>t2t2</Name>
+                    <Executable>/lustre/user/bruegge/fittinoprotected/tools/MG5_aMC_v2_6_0/bin/mg5_aMC</Executable>
+	        	<MGinputFile>MGt2t2~_cMSSM_13TeV_jet_1.txt</MGinputFile>	       
+                        <Decay_Width>[SPheno_GammaTotal_~chi1p]</Decay_Width>
+	        	<BannerFile>cMSSM_t2t2~/Events/run_01/run_01_tag_1_banner.txt</BannerFile>	       
+			<SLHAFile>SPheno.spc</SLHAFile>	       
+			<EventFile>cMSSM_t2t2~/Events/run_01/unweighted_events.lhe.gz</EventFile>	       
+           		<InputFile>
+                           <Template>MG_template_t2t2~.txt</Template>
+                           <Name> MGt2t2~_cMSSM_13TeV_jet_1.txt </Name>
+                           <Quantity>
+                              <Name>[events]</Name>
+                              <Value>[t2t2~_N]</Value>
+                           </Quantity>
+                         </InputFile>
+                </MadGraph5Calculator>
+                <MadGraph5Calculator>
+
+		    <Name>gosq</Name>
+                    <Executable>/lustre/user/bruegge/fittinoprotected/tools/MG5_aMC_v2_6_0/bin/mg5_aMC</Executable>
+	        	<MGinputFile>MGgosq_cMSSM_13TeV_jet_1.txt</MGinputFile>	       
+                        <Decay_Width>[SPheno_GammaTotal_~chi1p]</Decay_Width>
+	        	<BannerFile>cMSSM_gosq/Events/run_01/run_01_tag_1_banner.txt</BannerFile>	       
+			<SLHAFile>SPheno.spc</SLHAFile>	       
+			<EventFile>cMSSM_gosq/Events/run_01/unweighted_events.lhe.gz</EventFile>	       
+           		<InputFile>
+                           <Template>MG_template_gosq.txt</Template>
+                           <Name> MGgosq_cMSSM_13TeV_jet_1.txt </Name>
+                           <Quantity>
+                              <Name>[events]</Name>
+                              <Value>[gosq_N]</Value>
+                           </Quantity>
+                         </InputFile>
+                </MadGraph5Calculator>
+                <MadGraph5Calculator>
+		    <Name>sqasq</Name>
+
+                    <Executable>/lustre/user/bruegge/fittinoprotected/tools/MG5_aMC_v2_6_0/bin/mg5_aMC</Executable>
+	        	<MGinputFile>MGsqasq_cMSSM_13TeV_jet_1.txt</MGinputFile>	       
+                        <Decay_Width>[SPheno_GammaTotal_~chi1p]</Decay_Width>
+	        	<BannerFile>cMSSM_sqasq/Events/run_01/run_01_tag_1_banner.txt</BannerFile>	       
+			<SLHAFile>SPheno.spc</SLHAFile>	       
+			<EventFile>cMSSM_sqasq/Events/run_01/unweighted_events.lhe.gz</EventFile>	       
+           		<InputFile>
+                           <Template>MG_template_sqasq.txt</Template>
+                           <Name> MGsqasq_cMSSM_13TeV_jet_1.txt </Name>
+                           <Quantity>
+                              <Name>[events]</Name>
+                              <Value>[sqasq_N]</Value>
+                           </Quantity>
+                         </InputFile>
+                </MadGraph5Calculator>
+                <MadGraph5Calculator>
+
+		    <Name>sqsq</Name>
+                    <Executable>/lustre/user/bruegge/fittinoprotected/tools/MG5_aMC_v2_6_0/bin/mg5_aMC</Executable>
+	        	<MGinputFile>MGsqsq_cMSSM_13TeV_jet_1.txt</MGinputFile>	       
+                        <Decay_Width>[SPheno_GammaTotal_~chi1p]</Decay_Width>
+	        	<BannerFile>cMSSM_sqsq/Events/run_01/run_01_tag_1_banner.txt</BannerFile>	       
+			<SLHAFile>SPheno.spc</SLHAFile>	       
+			<EventFile>cMSSM_sqsq/Events/run_01/unweighted_events.lhe.gz</EventFile>	       
+           		<InputFile>
+                           <Template>MG_template_sqsq.txt</Template>
+                           <Name> MGsqsq_cMSSM_13TeV_jet_1.txt </Name>
+                           <Quantity>
+                              <Name>[events]</Name>
+                              <Value>[sqsq_N]</Value>
+                           </Quantity>
+                         </InputFile>
+                </MadGraph5Calculator>  
+	
+		<EventNumber3Calculator>
+                    <Name>ewew</Name>
+                    <Executable>/lustre/user/bruegge/fittinoprotected/tools/MG5_aMC_v2_6_0/bin/mg5_aMC</Executable>
+                    <XS>[ewew_XS]</XS>
+                </EventNumber3Calculator>
+		<EventNumber3Calculator>
+                    <Name>ewst</Name>
+                    <Executable>/lustre/user/bruegge/fittinoprotected/tools/MG5_aMC_v2_6_0/bin/mg5_aMC</Executable>
+                    <XS>[ewst_XS]</XS>
+                </EventNumber3Calculator>
+
+
+
+   <!--		<NLLFast2Calculator>
+			<Directory>/lustre/user/bruegge/fittinoprotected/tools/nll-Fast</Directory>
+			<Executable>/lustre/user/bruegge/fittinoprotected/tools/nll-Fast/nllfast-3.1</Executable>
+			<Mass_g>[SPheno_Mass_~g]</Mass_g>
+			<Mass_s>[SPheno_Mass_~uR]</Mass_s>
+			<Mass_b1>[SPheno_Mass_~b1]</Mass_b1>
+			<Mass_b2>[SPheno_Mass_~b2]</Mass_b2>
+			<Mass_t1>[SPheno_Mass_~t1]</Mass_t1>
+			<Mass_t2>[SPheno_Mass_~t2]</Mass_t2>
+		</NLLFast2Calculator>   -->
+
+  <!--            <NLLFast2Calculator>
+                        <Directory>/lustre/user/bruegge/fittinoprotected/tools/nll-Fast2</Directory>
+                        <Executable>/lustre/user/bruegge/fittinoprotected/tools/nll-Fast2/nllfast2_1</Executable>
+                        <Mass_g>[SPheno_Mass_~g]</Mass_g>
+                        <Mass_s>[SPheno_Mass_~uR]</Mass_s>
+                        <Mass_b1>[SPheno_Mass_~b1]</Mass_b1>
+                        <Mass_b2>[SPheno_Mass_~b2]</Mass_b2>
+                        <Mass_t1>[SPheno_Mass_~t1]</Mass_t1>
+                        <Mass_t2>[SPheno_Mass_~t2]</Mass_t2>
+                </NLLFast2Calculator>   -->
+
+
+
+
+                <CheckMATE4Calculator>
+
+                    
+		    <old_result>My_New_Run/evaluation/total_results.txt</old_result>
+		    <results>checkmate_cMSSM/evaluation/total_results.txt</results>
+		    <r_results>checkmate_cMSSM/result.txt</r_results>
+                    <Executable>/lustre/user/bruegge/fittinoprotected/tools/CheckMATE/CheckMATE-2.0.11/bin/CheckMATE</Executable>
+		    <InputFileTest>/lustre/user/bruegge/fittinorun/testparam_with_analysis.dat</InputFileTest>
+                    <InputFile>
+                        <Template>/lustre/user/bruegge/cm_input_cMSSM_13TeV_jet_withew_noCL</Template>
+                        <Name>cm_input_cMSSM</Name>
+                        <Quantity>
+                            <Name>[XSect_sqsq]</Name>
+                            <Value>[sqsq_NXS]</Value>
+                        </Quantity>
+                        <Quantity>
+                            <Name>[XSect_sqsq_err]</Name>
+                            <Value>[Pro_ErrNLO_ss]</Value>
+                        </Quantity>  
+                        <Quantity>   
+                            <Name>[XSgogo]</Name>
+                            <Value>[gogo_NXS]</Value>
+                        </Quantity>
+                        <Quantity>
+                            <Name>[XSect_gogo_err]</Name>
+                            <Value>[Pro_ErrNLO_gg]</Value>
+                        </Quantity>
+                         <Quantity>
+                            <Name>[XSect_sqasq]</Name>
+                            <Value>[sqasq_NXS]</Value>
+                        </Quantity>
+                        <Quantity>
+                            <Name>[XSect_sqasq_err]</Name>
+                            <Value>[Pro_ErrNLO_sb]</Value>
+                        </Quantity>
+                        <Quantity>
+                            <Name>[XSect_gosq]</Name>
+                            <Value>[gosq_NXS]</Value>
+                        </Quantity>
+                        <Quantity>
+                            <Name>[XSect_gosq_err]</Name>
+                            <Value>[Pro_ErrNLO_sg]</Value>
+                        </Quantity>
+                        <Quantity>
+                            <Name>[XSect_st1ast1]</Name>
+                            <Value>[t1t1~_NXS]</Value>
+                        </Quantity>
+                        <Quantity>
+                            <Name>[XSect_st1ast1_err]</Name>
+                            <Value>[Pro_ErrNLO_tb1]</Value>
+                        </Quantity>
+                        <Quantity>
+                            <Name>[XSect_st2ast2]</Name>
+                            <Value>[t2t2~_NXS]</Value>
+                        </Quantity>
+                        <Quantity>
+                            <Name>[XSect_st2ast2_err]</Name>
+                            <Value>[Pro_ErrNLO_tb2]</Value>
+                        </Quantity>
+                        <Quantity>
+                            <Name>[XSect_sb1asb1]</Name>
+                            <Value>[b1b1~_NXS]</Value>
+                        </Quantity>
+                        <Quantity>
+                            <Name>[XSect_sb1asb1_err]</Name>
+                            <Value>[Pro_ErrNLO_bb1]</Value>
+                        </Quantity>
+                        <Quantity>
+                            <Name>[XSect_sb2asb2]</Name>
+                            <Value>[b2b2~_NXS]</Value>
+                        </Quantity>
+                        <Quantity>
+                            <Name>[XSect_sb2asb2_err]</Name>
+                            <Value>[Pro_ErrNLO_bb2]</Value>
+                        </Quantity> 
+                         <Quantity>
+                            <Name>[XSewew]</Name>
+                            <Value>[ewew_NXS]</Value>
+                        </Quantity>
+                        <Quantity>
+                            <Name>[XSewst]</Name>
+                            <Value>[ewst_NXS]</Value>
+                        </Quantity>
+                        <Quantity>
+                            <Name>[XSect_ewew_err]</Name>
+                            <Value>[ewew_XS_MGerror]</Value>
+                        </Quantity>
+                        <Quantity>
+                            <Name>[XSect_ewst_err]</Name>
+                            <Value>[ewst_XS_MGerror]</Value>
+                        </Quantity>
+ 
+                    </InputFile>
+                </CheckMATE4Calculator>  
+
+               <ClsCalculator_2>
+                        <Name></Name>
+                        <results>./checkmate_cMSSM/evaluation/total_results.txt</results>
+                        <number_SR>4</number_SR>
+                        <energy>13</energy>
+                        <number_toys>None</number_toys>
+			<orthogonal_group>orthogonal.txt</orthogonal_group>
+                        <python_script>python_newmethod.py</python_script>
+                        <python_result>cls_value.txt</python_result>
+                </ClsCalculator_2>   
+
+
+
+            </Calculators>
+
+
+        </ModelBase>
+
+    </Model>
+
+    <Tool>
+
+        <MarkovChainSampler>
+            <NumberOfIterations>1</NumberOfIterations>
+        </MarkovChainSampler>
+
+    </Tool>
+
+</InputFile>
+
