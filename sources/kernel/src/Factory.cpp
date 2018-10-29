@@ -65,9 +65,16 @@
 #include "MadGraphCalculator.h"
 #include "MadGraph2Calculator.h"
 #include "MadGraph5Calculator.h"
+#include "MadGraph5EWCalculator.h"
+#include "ClsCalculator_2.h"
 #include "MinimumCalculator.h"
 #include "ProspinoCalculator.h"
 #include "CheckMATE3Calculator.h"
+#include "FormulaPropCalculator.h"
+#include "EventNumber2Calculator.h"
+#include "EventNumber3Calculator.h"
+#include "LHCNeuralNet2Calculator.h"
+#include "CheckMATE4Calculator.h"
 #include "NLLFast2Calculator.h"
 #include "MarkovChainSampler.h"
 #include "MicromegasCalculator.h"
@@ -397,6 +404,14 @@ Fittino::CalculatorBase* const Fittino::Factory::CreateCalculator( const std::st
 
         return new MadGraph5Calculator( model, ptree );
    }
+    else if ( type == "MadGraph5EWCalculator" ) {
+
+        return new MadGraph5EWCalculator( model, ptree );
+   }
+    else if ( type == "ClsCalculator_2" ) {
+
+        return new ClsCalculator_2( model, ptree );
+   }
     else if ( type == "MinimumCalculator" ) {
         
         return new MinimumCalculator( model, ptree );
@@ -415,6 +430,26 @@ Fittino::CalculatorBase* const Fittino::Factory::CreateCalculator( const std::st
    else if ( type == "CheckMATE3Calculator" ) {
 
         return new CheckMATE3Calculator( model, ptree );
+    }
+   else if ( type == "FormulaPropCalculator" ) {
+
+        return new FormulaPropCalculator( model, ptree );
+    }
+   else if ( type == "EventNumber2Calculator" ) {
+
+        return new EventNumber2Calculator( model, ptree );
+    }
+   else if ( type == "EventNumber3Calculator" ) {
+
+        return new EventNumber3Calculator( model, ptree );
+    }
+   else if ( type == "LHCNeuralNet2Calculator" ) {
+
+        return new LHCNeuralNet2Calculator( model, ptree );
+    }
+   else if ( type == "CheckMATE4Calculator" ) {
+
+        return new CheckMATE4Calculator( model, ptree );
     }
 
     else if ( type == "MicromegasCalculator" ) {
