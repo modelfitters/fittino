@@ -17,8 +17,8 @@
 *                                                                              *
 *******************************************************************************/
 
-#ifndef FITTINO_PROSPINOCALCULATOR_H
-#define FITTINO_PROSPINOCALCULATOR_H
+#ifndef FITTINO_MADGRAPH5EWCALCULATOR_H
+#define FITTINO_MADGRAPH5EWCALCULATOR_H
 
 #include <boost/property_tree/ptree.hpp>
 
@@ -46,35 +46,36 @@ namespace Fittino {
    *  \ingroup calculators
    *  \brief Wrapper class for MadGraph
    */
-  class ProspinoCalculator : public SLHACalculatorBase{
-
+  class MadGraph5EWCalculator : public CalculatorBase{
 
     public:
       /*!
        *  Standard constructor.
        */
-                          ProspinoCalculator( const ModelBase* model, const boost::property_tree::ptree& ptree );
+                          MadGraph5EWCalculator( const ModelBase* model, const boost::property_tree::ptree& ptree );
       /*!
        *  Standard destructor.
        */
-                          ~ProspinoCalculator();
+                          ~MadGraph5EWCalculator();
 
     public:
       virtual void        CalculatePredictions();
       virtual void        Initialize();
       virtual void        SetupMeasuredValues();
-      void                ReadFile();
+      virtual void        Check_Chargino_DecayWidth();
+      virtual void        Read_XS_Error();
+    
      private:
-    InputFile*             _inputFile;
+     //InputFile*             _inputFile;
 
-     //InputFile _inputFile;
-   //  Executor  _executor;
-    std::string _ProOutput;
-    std::string _ProsOldSLHAFile;
-    std::string _executable; 
-     double _weight;
+     InputFile _inputFile;
+     Executor  _executor;
+     std::string _BannerFile;
+     std::string _XSfile;
+      double _weight;
       double _nevents;
-      double _XSgogo;
+      double _XS;
+      double _XS_error;
       double _XSb1b1;
       double _XSb2b2;
       double _XSt1t1;
@@ -82,16 +83,15 @@ namespace Fittino {
       double _XSgosq;
       double _XSsqsq;
       double _XSsqasq;
-
+     std::string _MGinputFile;
+     std::map<std::string, int> _pdgIds;
+     std::string _EventFile;
      std::string _SLHAFile;
-
-//     std::map<std::string, int> _pdgIds;
-    
-     std::string _name;
-
+      double  _Decay_Width;
+      double  _Mt;
 
   };
 
 }
 
-#endif // FITTINO_PROSPINOCALCULATOR
+#endif // FITTINO_MADGRAPH5EWCALCULATOR_H
