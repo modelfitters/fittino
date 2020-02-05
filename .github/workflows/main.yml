@@ -19,12 +19,9 @@ jobs:
         touch html/.nojekyll
 
     - name: Deploy
-      uses: peaceiris/actions-gh-pages@v2
-      env:
-        ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-        # PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
-        # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        PUBLISH_BRANCH: gh-pages
-        PUBLISH_DIR: ./html
+      uses: peaceiris/actions-gh-pages@v3
       with:
-        forceOrphan: true
+        deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+        publish_branch: gh-pages
+        publish_dir: ./html
+        force_orphan: true
